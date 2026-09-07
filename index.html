@@ -357,19 +357,38 @@
       t = setTimeout(valmis, 900);
     }
 
+    function sulgeTeised(id) {
+      return new Promise(resolve => {
+        const teised = [...document.querySelectorAll("details.acc")].filter(
+          d => d.id !== id && (d.open || d.classList.contains("avatud"))
+        );
+        if (!teised.length) {
+          resolve();
+          return;
+        }
+        teised.forEach(d => d.classList.remove("avatud"));
+        setTimeout(() => {
+          teised.forEach(d => { d.open = false; });
+          resolve();
+        }, 850);
+      });
+    }
+
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
-      if (el.tagName === "DETAILS") {
-        el.open = false;
-        el.classList.remove("avatud");
-      }
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      kuiKeriLopp(() => {
-        if (el.tagName !== "DETAILS") return;
-        el.open = true;
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => el.classList.add("avatud"));
+      sulgeTeised(id).then(() => {
+        if (el.tagName === "DETAILS") {
+          el.open = false;
+          el.classList.remove("avatud");
+        }
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        kuiKeriLopp(() => {
+          if (el.tagName !== "DETAILS") return;
+          el.open = true;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => el.classList.add("avatud"));
+          });
         });
       });
     }
