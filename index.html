@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ivar Neio — helirännak</title>
+  <meta name="description" content="Madalsageduslik somaatilis-vibroakustiline helirännak. Parmupill, didgeridoo, kristallkausid. Kehra ja ümbrus.">
+  <style>
+    :root {
+      --cream: #fcf6ec;
+      --ink: #3e2723;
+      --muted: #6d4c41;
+      --line: #e8dcc8;
+      --accent: #c48448;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 38rem;
+      margin: 0 auto;
+      padding: 2.2rem 1.25rem 4rem;
+    }
+    header h1 {
+      font-size: 1.65rem;
+      font-weight: normal;
+      margin: 0 0 .35rem;
+      letter-spacing: .02em;
+    }
+    .lead {
+      color: var(--muted);
+      margin: 0 0 2rem;
+      font-size: 1.05rem;
+    }
+    h2 {
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: normal;
+      margin: 2.2rem 0 .7rem;
+    }
+    .next {
+      border: 1px solid var(--line);
+      padding: 1rem 1.1rem;
+      border-radius: 6px;
+    }
+    .next strong { display: block; font-size: 1.15rem; font-weight: normal; }
+    .next span { color: var(--muted); font-size: .95rem; }
+    .list { list-style: none; padding: 0; margin: 0; }
+    .list li {
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .list li:last-child { border-bottom: 0; }
+    .tais { color: var(--accent); font-size: .85rem; }
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: .15rem 0;
+    }
+    details summary {
+      cursor: pointer;
+      padding: .85rem 0;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after {
+      content: "+";
+      color: var(--accent);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    details[open] summary::after { content: "–"; }
+    details .body {
+      padding: 0 0 1.1rem;
+      color: var(--muted);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+      margin-top: .4rem;
+    }
+    .ph {
+      background: #efe4d0;
+      min-height: 7rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a1887f;
+      font-size: .8rem;
+      font-family: system-ui, sans-serif;
+    }
+    a { color: var(--ink); }
+    footer {
+      margin-top: 3rem;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    .empty { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Ivar Neio</h1>
+      <p class="lead">Madalsageduslik helirännak. Heli on kuulda ja kehas tunda.</p>
+    </header>
+
+    <h2>Järgmine</h2>
+    <div class="next" id="jargmine">Laen listi…</div>
+
+    <h2>Tulekul</h2>
+    <ul class="list" id="list"></ul>
+
+    <h2>Rohkem</h2>
+
+    <details>
+      <summary>Mis see on</summary>
+      <div class="body">
+        <p>Helirännak parmupilli, didgeridoo ja madalate kristallkausidega. Heli ei jää ainult kõrvadesse.</p>
+        <p>Enne sukeldumist on lühike kehaäratus ja paar suunavat lauset. Rääkida ei ole vaja. Võib lamada või istuda.</p>
+        <details>
+          <summary>Pikemalt</summary>
+          <div class="body">
+            <p>Madal heli võib anda kehale rahusignaali — raskus, soojus, surin. Ühest õhtust on mõistlik oodata vaiksemat närvisüsteemi ja selgemat tunnet kehas, mitte imeravi. Korduvalt tulles õpib keha seda teed kiiremini üles leidma.</p>
+            <p>Pillid eraldi: parmupill on lähedal ja väike; didgeridoo on keha droon; kausid avavad ruumi. Koos kannavad nad teekonda, mitte kontserti.</p>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <details>
+      <summary>Kuidas tulla</summary>
+      <div class="body">
+        <p><strong>Avatud rännak</strong> — Kehra kultuurimaja, kuni 20 inimest. Koht nime ja telefoniga. Maksmine sularahas kohapeal.</p>
+        <p>Kestus umbes 75 minutit plus sissejuhatus. Kaasa tekk või soe ese, kui tahad lamada.</p>
+        <p>Kui oled rase, ägedalt haige või heli on sulle raske, küsi enne.</p>
+        <details>
+          <summary>Teised võimalused</summary>
+          <div class="body">
+            <p>Privaatne seanss või koostöö majutus- ja mõisakohtadega — küsi telefonil.</p>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <details>
+      <summary>Pildid</summary>
+      <div class="body">
+        <div class="gallery">
+          <div class="ph">parmupill</div>
+          <div class="ph">didgeridoo</div>
+          <div class="ph">kausid</div>
+          <div class="ph">saal</div>
+        </div>
+        <p>Siia tulevad sinu fotod kausta <code>pildid/</code>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Kontakt</summary>
+      <div class="body">
+        <p>Ivar Neio, Kehra</p>
+        <p>Telefon: <em>lisa number</em></p>
+        <p>Koht kinnitatakse sõnumiga. Päev enne küsime üle.</p>
+      </div>
+    </details>
+
+    <footer>Helivann · Kehra</footer>
+  </div>
+
+  <script>
+    function formaat(d) {
+      const [y, m, day] = d.split("-");
+      return day + "." + m + "." + y;
+    }
+    fetch("sundmused.json", { cache: "no-store" })
+      .then(r => r.json())
+      .then(rows => {
+        const soon = rows
+          .slice()
+          .sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
+        const nextBox = document.getElementById("jargmine");
+        const list = document.getElementById("list");
+        if (!soon.length) {
+          nextBox.innerHTML = "<span class='empty'>Uus kuupäev tuleb varsti.</span>";
+          list.innerHTML = "";
+          return;
+        }
+        const n = soon[0];
+        nextBox.innerHTML =
+          "<strong>" + formaat(n.kuupaev) + " · " + n.kellaaeg + "</strong>" +
+          "<span>" + n.koht + (n.tais ? " · täis" : "") + "</span>";
+        list.innerHTML = soon.map(e =>
+          "<li><strong>" + formaat(e.kuupaev) + " · " + e.kellaaeg + "</strong><br>" +
+          e.koht +
+          (e.markus ? "<br><span>" + e.markus + "</span>" : "") +
+          (e.tais ? " <span class='tais'>täis</span>" : "") +
+          "</li>"
+        ).join("");
+      })
+      .catch(() => {
+        document.getElementById("jargmine").textContent = "Listi ei saanud laadida.";
+      });
+  </script>
+</body>
+</html>
