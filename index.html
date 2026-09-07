@@ -13,173 +13,203 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ivar Neio — helirännak">
-  <meta name="twitter:description" content="Heli on kuulda ja kehas tunda.">
-  <meta name="twitter:image" content="https://ivarneio.github.io/helivann/og.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #fcf6ec;
-      --ink: #3e2723;
-      --muted: #6d4c41;
-      --line: #e8dcc8;
-      --accent: #c48448;
+      --cream: #f7efe3;
+      --paper: #fbf6ee;
+      --ink: #2b1c16;
+      --muted: #6b4e3e;
+      --line: #e2d3bf;
+      --accent: #b5743a;
+      --dark: #1a110d;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Source Sans 3", system-ui, sans-serif;
       background: var(--cream);
       color: var(--ink);
-      line-height: 1.55;
+      line-height: 1.6;
     }
+    .hero {
+      position: relative;
+      min-height: 72vh;
+      background: var(--dark) center/cover no-repeat;
+      background-image: linear-gradient(180deg, rgba(18,10,6,.25) 0%, rgba(18,10,6,.55) 55%, rgba(18,10,6,.82) 100%), url("pildid/hero.jpg");
+      color: #f6eee2;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-inner {
+      width: min(40rem, calc(100% - 2.4rem));
+      margin: 0 auto 3.2rem;
+    }
+    .eyebrow {
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      opacity: .78;
+      margin: 0 0 .7rem;
+    }
+    .hero h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.05;
+      margin: 0 0 .6rem;
+    }
+    .hero p { margin: 0; font-size: 1.12rem; max-width: 22rem; opacity: .9; }
     .wrap {
-      max-width: 38rem;
+      width: min(40rem, calc(100% - 2.4rem));
       margin: 0 auto;
-      padding: 2.2rem 1.25rem 4rem;
-    }
-    header h1 {
-      font-size: 1.65rem;
-      font-weight: normal;
-      margin: 0 0 .35rem;
-      letter-spacing: .02em;
-    }
-    .lead {
-      color: var(--muted);
-      margin: 0 0 2rem;
-      font-size: 1.05rem;
+      padding: 2.4rem 0 4.5rem;
     }
     h2 {
-      font-size: .72rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: normal;
-      margin: 2.2rem 0 .7rem;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 500;
+      margin: 2.4rem 0 .8rem;
     }
-    .next {
+    .card {
+      background: var(--paper);
       border: 1px solid var(--line);
-      padding: 1rem 1.1rem;
-      border-radius: 6px;
+      border-radius: 14px;
+      padding: 1.25rem 1.3rem 1.15rem;
+      box-shadow: 0 10px 30px rgba(43, 28, 22, .05);
     }
-    .next strong { display: block; font-size: 1.15rem; font-weight: normal; }
-    .next span { color: var(--muted); font-size: .95rem; }
+    .card .when {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.55rem;
+      line-height: 1.2;
+    }
+    .card .where { color: var(--muted); margin-top: .15rem; }
     .list { list-style: none; padding: 0; margin: 0; }
-    .list li {
-      padding: .7rem 0;
-      border-bottom: 1px solid var(--line);
-    }
+    .list li { padding: .85rem 0; border-bottom: 1px solid var(--line); }
     .list li:last-child { border-bottom: 0; }
-    .tais { color: var(--accent); font-size: .85rem; }
-    details {
-      border-bottom: 1px solid var(--line);
-      padding: .15rem 0;
+    .tais {
+      display: inline-block;
+      margin-left: .35rem;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
     }
-    details summary {
+    details.acc {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin: .55rem 0;
+      overflow: hidden;
+    }
+    details.acc summary {
       cursor: pointer;
-      padding: .85rem 0;
+      padding: .95rem 1.15rem;
       list-style: none;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-    }
-    details summary::-webkit-details-marker { display: none; }
-    details summary::after {
-      content: "+";
-      color: var(--accent);
-      font-size: 1.2rem;
-      line-height: 1;
-    }
-    details[open] summary::after { content: "–"; }
-    details .body {
-      padding: 0 0 1.1rem;
-      color: var(--muted);
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .5rem;
-      margin-top: .4rem;
-    }
-    .ph {
-      background: #efe4d0;
-      min-height: 7rem;
-      border-radius: 4px;
-      display: flex;
       align-items: center;
-      justify-content: center;
-      color: #a1887f;
-      font-size: .8rem;
-      font-family: system-ui, sans-serif;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.28rem;
     }
-    a { color: var(--ink); }
+    details.acc summary::-webkit-details-marker { display: none; }
+    details.acc summary::after {
+      content: "";
+      width: .55rem; height: .55rem;
+      border-right: 1.5px solid var(--accent);
+      border-bottom: 1.5px solid var(--accent);
+      transform: rotate(45deg);
+      transition: transform .2s;
+    }
+    details.acc[open] summary::after { transform: rotate(225deg); }
+    details.acc .body { padding: 0 1.15rem 1.15rem; color: var(--muted); }
+    details.acc .body p { margin: .45rem 0; }
+    details.inner { border-top: 1px solid var(--line); margin-top: .7rem; padding-top: .2rem; }
+    details.inner summary {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: .95rem;
+      padding: .55rem 0;
+    }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; margin-top: .5rem; }
+    .gallery img {
+      width: 100%;
+      height: 8.5rem;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
     footer {
-      margin-top: 3rem;
-      font-size: .85rem;
-      color: var(--muted);
+      background: var(--dark);
+      color: #e8d8c6;
+      padding: 1.6rem 1.2rem 2rem;
+      text-align: center;
+      font-size: .88rem;
     }
     .empty { color: var(--muted); }
+    a { color: var(--ink); }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Kehra · parmupill · didgeridoo · kausid</p>
       <h1>Ivar Neio</h1>
-      <p class="lead">Madalsageduslik helirännak. Heli on kuulda ja kehas tunda.</p>
-    </header>
+      <p>Heli on kuulda ja kehas tunda.</p>
+    </div>
+  </header>
 
-    <h2>Järgmine</h2>
-    <div class="next" id="jargmine">Laen listi…</div>
+  <main class="wrap">
+    <h2>Järgmine rännak</h2>
+    <div class="card" id="jargmine">Laen listi…</div>
 
     <h2>Tulekul</h2>
     <ul class="list" id="list"></ul>
 
-    <h2>Rohkem</h2>
+    <h2>Kui tahad teada</h2>
 
-    <details>
+    <details class="acc">
       <summary>Mis see on</summary>
       <div class="body">
-        <p>Helirännak parmupilli, didgeridoo ja madalate kristallkausidega. Heli ei jää ainult kõrvadesse.</p>
-        <p>Enne sukeldumist on lühike kehaäratus ja paar suunavat lauset. Rääkida ei ole vaja. Võib lamada või istuda.</p>
-        <details>
+        <p>Helirännak parmupilli, didgeridoo ja madalate kristallkausidega. Enne heli on lühike kehaäratus ja paar suunavat lauset. Rääkida ei ole vaja.</p>
+        <details class="inner">
           <summary>Pikemalt</summary>
           <div class="body">
-            <p>Madal heli võib anda kehale rahusignaali — raskus, soojus, surin. Ühest õhtust on mõistlik oodata vaiksemat närvisüsteemi ja selgemat tunnet kehas, mitte imeravi. Korduvalt tulles õpib keha seda teed kiiremini üles leidma.</p>
-            <p>Pillid eraldi: parmupill on lähedal ja väike; didgeridoo on keha droon; kausid avavad ruumi. Koos kannavad nad teekonda, mitte kontserti.</p>
+            <p>Madal heli võib anda kehale rahusignaali — raskus, soojus, surin. Ühest õhtust on mõistlik oodata vaiksemat närvisüsteemi, mitte imeravi. Korduvalt tulles õpib keha seda teed kiiremini üles leidma.</p>
+            <p>Parmupill on lähedal ja väike. Didgeridoo on keha droon. Kausid avavad ruumi. Koos on see teekond, mitte kontsert.</p>
           </div>
         </details>
       </div>
     </details>
 
-    <details>
+    <details class="acc">
       <summary>Kuidas tulla</summary>
       <div class="body">
         <p><strong>Avatud rännak</strong> — Kehra kultuurimaja, kuni 20 inimest. Koht nime ja telefoniga. Maksmine sularahas kohapeal.</p>
-        <p>Kestus umbes 75 minutit plus sissejuhatus. Kaasa tekk või soe ese, kui tahad lamada.</p>
+        <p>Kestus umbes 75 minutit plus sissejuhatus. Kaasa tekk, kui tahad lamada.</p>
         <p>Kui oled rase, ägedalt haige või heli on sulle raske, küsi enne.</p>
-        <details>
+        <details class="inner">
           <summary>Teised võimalused</summary>
           <div class="body">
-            <p>Privaatne seanss või koostöö majutus- ja mõisakohtadega — küsi telefonil.</p>
+            <p>Privaatne seanss või koostöö majutuskohtadega — küsi telefonil.</p>
           </div>
         </details>
       </div>
     </details>
 
-    <details>
+    <details class="acc">
       <summary>Pildid</summary>
       <div class="body">
         <div class="gallery">
-          <div class="ph">parmupill</div>
-          <div class="ph">didgeridoo</div>
-          <div class="ph">kausid</div>
-          <div class="ph">saal</div>
+          <img src="pildid/hero.jpg" alt="Pillid soojas valguses">
+          <img src="pildid/kausid.jpg" alt="Kristallkausid">
         </div>
-        <p>Siia tulevad sinu fotod kausta <code>pildid/</code>.</p>
+        <p>Siia tulevad ka sinu enda fotod.</p>
       </div>
     </details>
 
-    <details>
+    <details class="acc">
       <summary>Kontakt</summary>
       <div class="body">
         <p>Ivar Neio, Kehra</p>
@@ -187,9 +217,9 @@
         <p>Koht kinnitatakse sõnumiga. Päev enne küsime üle.</p>
       </div>
     </details>
+  </main>
 
-    <footer>Helivann · Kehra</footer>
-  </div>
+  <footer>Helivann · Kehra</footer>
 
   <script>
     function formaat(d) {
@@ -199,9 +229,7 @@
     fetch("sundmused.json", { cache: "no-store" })
       .then(r => r.json())
       .then(rows => {
-        const soon = rows
-          .slice()
-          .sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
+        const soon = rows.slice().sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
         const nextBox = document.getElementById("jargmine");
         const list = document.getElementById("list");
         if (!soon.length) {
@@ -211,8 +239,8 @@
         }
         const n = soon[0];
         nextBox.innerHTML =
-          "<strong>" + formaat(n.kuupaev) + " · " + n.kellaaeg + "</strong>" +
-          "<span>" + n.koht + (n.tais ? " · täis" : "") + "</span>";
+          "<div class='when'>" + formaat(n.kuupaev) + " · " + n.kellaaeg + "</div>" +
+          "<div class='where'>" + n.koht + (n.tais ? " · täis" : "") + "</div>";
         list.innerHTML = soon.map(e =>
           "<li><strong>" + formaat(e.kuupaev) + " · " + e.kellaaeg + "</strong><br>" +
           e.koht +
