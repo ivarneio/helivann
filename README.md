@@ -1,16 +1,16 @@
 # Helivann
 
-Ivar Neio helirännakute leht.
-
-Avalik aadress pärast Pages'i sisselülitamist:
 https://ivarneio.github.io/helivann/
 
-## Listi muutmine
+## Sina muudad
 
-1. Ava fail `sundmused.json`
-2. Vajuta pliiatsi ikooni
-3. Muuda ridu
-4. Commit changes
+- `sundmused.json` — kuupäevad
+- `seaded.json` — telefon, Facebook, Instagram
+- `sisu.json` — seletused (Mis see on, Kuidas tulla, pikemad lõigud), eesti ja inglise
 
-`tais: true` tähendab, et kohad on täis.
-]
+## Mina muudan
+
+- `index.html` — kujundus
+- `tekstid.json` — nupud, pealkirjad, menüü
+
+Ära asenda `seaded.json` ega `sisu.json`, kui saad uue lehefaili.

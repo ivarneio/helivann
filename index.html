@@ -322,13 +322,15 @@
     let T = {};
     let lang = localStorage.getItem("keel") || "et";
     let rowsCache = [];
+    let seaded = { telefon: "", facebook: "", instagram: "" };
+    let sisu = { et: {}, en: {} };
 
     function formaat(d) {
       const [y, m, day] = d.split("-");
       return day + "." + m + "." + y;
     }
     function apply() {
-      const pack = T[lang] || T.et;
+      const pack = Object.assign({}, T[lang] || T.et, sisu[lang] || sisu.et || {});
       document.documentElement.lang = lang;
       document.querySelectorAll("[data-i]").forEach(el => {
         const k = el.getAttribute("data-i");
@@ -337,6 +339,18 @@
       document.querySelectorAll(".langs button").forEach(b => {
         b.classList.toggle("on", b.dataset.lang === lang);
       });
+      const telEl = document.querySelector("[data-i='telefon']");
+      if (telEl) {
+        const nr = (seaded.telefon || "").trim();
+        telEl.textContent = pack.telefon + (nr ? ": " + nr : "");
+        if (nr) {
+          telEl.innerHTML = pack.telefon + ": <a href='tel:" + nr.replace(/\s/g, "") + "'>" + nr + "</a>";
+        }
+      }
+      const fb = document.getElementById("link-fb");
+      const ig = document.getElementById("link-ig");
+      if (fb) fb.href = seaded.facebook || "#";
+      if (ig) ig.href = seaded.instagram || "#";
       renderList();
     }
     function renderList() {
@@ -457,10 +471,14 @@
 
     Promise.all([
       fetch("tekstid.json", { cache: "no-store" }).then(r => r.json()),
-      fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => [])
-    ]).then(([tekstid, rows]) => {
+      fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []),
+      fetch("seaded.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({})),
+      fetch("sisu.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({ et: {}, en: {} }))
+    ]).then(([tekstid, rows, s, sisuFail]) => {
       T = tekstid;
       rowsCache = rows;
+      seaded = Object.assign(seaded, s);
+      sisu = sisuFail;
       apply();
     }).catch(() => {
       document.getElementById("jargmine").textContent = "Listi ei saanud laadida.";
