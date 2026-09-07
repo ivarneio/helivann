@@ -393,12 +393,15 @@
       });
     }
 
-    document.querySelectorAll("details.acc").forEach(d => {
-      d.addEventListener("toggle", () => {
-        if (d.open) {
-          requestAnimationFrame(() => d.classList.add("avatud"));
-        } else {
+    document.querySelectorAll("details.acc > summary").forEach(s => {
+      s.addEventListener("click", (e) => {
+        e.preventDefault();
+        const d = s.parentElement;
+        if (d.open || d.classList.contains("avatud")) {
           d.classList.remove("avatud");
+          setTimeout(() => { d.open = false; }, 850);
+        } else {
+          avaKoht(d.id);
         }
       });
     });
