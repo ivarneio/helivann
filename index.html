@@ -158,17 +158,21 @@
       transform: rotate(45deg);
     }
     details.acc[open] summary::after { transform: rotate(225deg); }
+    details.acc .acc-clip {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .85s ease-in-out;
+    }
+    details.acc.avatud .acc-clip {
+      grid-template-rows: 1fr;
+    }
+    details.acc .acc-clip > .body {
+      overflow: hidden;
+      min-height: 0;
+    }
     details.acc .body {
       padding: 0 1.15rem 1.15rem;
       color: var(--muted);
-      overflow: hidden;
-    }
-    details.acc[open] .body {
-      animation: paneelAva .9s ease;
-    }
-    @keyframes paneelAva {
-      from { opacity: 0; max-height: 0; }
-      to { opacity: 1; max-height: 40rem; }
     }
     details.inner { border-top: 1px solid var(--line); margin-top: .7rem; padding-top: .2rem; }
     details.inner summary {
@@ -239,6 +243,7 @@
 
     <details class="acc" id="mis">
       <summary data-i="mis">Mis see on</summary>
+      <div class="acc-clip">
       <div class="body">
         <p data-i="mis_lyhi">Helirännak parmupilli, didgeridoo ja madalate kristallkausidega. Enne heli on lühike kehaäratus ja paar suunavat lauset. Rääkida ei ole vaja.</p>
         <details class="inner">
@@ -249,10 +254,12 @@
           </div>
         </details>
       </div>
+      </div>
     </details>
 
     <details class="acc" id="kuidas">
       <summary data-i="kuidas">Kuidas tulla</summary>
+      <div class="acc-clip">
       <div class="body">
         <p data-i="kuidas_lyhi"></p>
         <p data-i="kuidas_kestus"></p>
@@ -263,6 +270,7 @@
             <p data-i="muud_tekst"></p>
           </div>
         </details>
+      </div>
       </div>
     </details>
 
@@ -352,12 +360,29 @@
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
-      if (el.tagName === "DETAILS") el.open = false;
+      if (el.tagName === "DETAILS") {
+        el.open = false;
+        el.classList.remove("avatud");
+      }
       el.scrollIntoView({ behavior: "smooth", block: "start" });
       kuiKeriLopp(() => {
-        if (el.tagName === "DETAILS") el.open = true;
+        if (el.tagName !== "DETAILS") return;
+        el.open = true;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => el.classList.add("avatud"));
+        });
       });
     }
+
+    document.querySelectorAll("details.acc").forEach(d => {
+      d.addEventListener("toggle", () => {
+        if (d.open) {
+          requestAnimationFrame(() => d.classList.add("avatud"));
+        } else {
+          d.classList.remove("avatud");
+        }
+      });
+    });
 
     document.querySelectorAll("nav.toc a").forEach(a => {
       a.addEventListener("click", (e) => {
