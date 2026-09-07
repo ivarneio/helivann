@@ -158,7 +158,18 @@
       transform: rotate(45deg);
     }
     details.acc[open] summary::after { transform: rotate(225deg); }
-    details.acc .body { padding: 0 1.15rem 1.15rem; color: var(--muted); }
+    details.acc .body {
+      padding: 0 1.15rem 1.15rem;
+      color: var(--muted);
+      overflow: hidden;
+    }
+    details.acc[open] .body {
+      animation: paneelAva .9s ease;
+    }
+    @keyframes paneelAva {
+      from { opacity: 0; max-height: 0; }
+      to { opacity: 1; max-height: 40rem; }
+    }
     details.inner { border-top: 1px solid var(--line); margin-top: .7rem; padding-top: .2rem; }
     details.inner summary {
       font-family: "Source Sans 3", sans-serif;
@@ -324,12 +335,27 @@
       });
     });
 
+    function kuiKeriLopp(cb) {
+      let t;
+      const valmis = () => {
+        window.removeEventListener("scroll", onScroll);
+        cb();
+      };
+      const onScroll = () => {
+        clearTimeout(t);
+        t = setTimeout(valmis, 140);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      t = setTimeout(valmis, 900);
+    }
+
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
-      if (el.tagName === "DETAILS") el.open = true;
-      requestAnimationFrame(() => {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (el.tagName === "DETAILS") el.open = false;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      kuiKeriLopp(() => {
+        if (el.tagName === "DETAILS") el.open = true;
       });
     }
 
