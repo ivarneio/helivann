@@ -170,7 +170,29 @@
       align-items: center;
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 1.28rem;
+      gap: 1rem;
     }
+    .sum-peamine {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .2rem;
+      text-align: left;
+    }
+    .sum-silt { line-height: 1.2; }
+    #jargmine {
+      font-family: "Source Sans 3", sans-serif;
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    #jargmine .when {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.35rem;
+      color: var(--ink);
+      display: block;
+    }
+    #jargmine .where { display: block; }
     details.acc summary::-webkit-details-marker { display: none; }
     details.acc summary::after {
       content: "";
@@ -263,10 +285,19 @@
   </header>
 
   <main class="wrap">
-    <h2 id="tulekul" data-i="jargmine">Järgmine rännak</h2>
-    <div class="card" id="jargmine">Laen listi…</div>
-
-    <ul class="list" id="list"></ul>
+    <details class="acc" id="tulekul">
+      <summary>
+        <div class="sum-peamine">
+          <span class="sum-silt" data-i="jargmine">Järgmine rännak</span>
+          <span id="jargmine">Laen listi…</span>
+        </div>
+      </summary>
+      <div class="acc-clip">
+        <div class="body">
+          <ul class="list" id="list"></ul>
+        </div>
+      </div>
+    </details>
 
     <details class="acc" id="mis">
       <summary data-i="mis">Mis see on</summary>
@@ -367,7 +398,7 @@
       nextBox.innerHTML =
         "<div class='when'>" + formaat(n.kuupaev) + " · " + n.kellaaeg + "</div>" +
         "<div class='where'>" + n.koht + (n.tais ? " · " + pack.tais : "") + "</div>";
-      list.innerHTML = soon.slice(1).map(e =>
+      list.innerHTML = soon.slice(1, 4).map(e =>
         "<li><strong>" + formaat(e.kuupaev) + " · " + e.kellaaeg + "</strong><br>" +
         e.koht +
         (e.markus ? "<br><span>" + e.markus + "</span>" : "") +
