@@ -50,5 +50,31 @@
     "telefon": "Phone",
     "kontakt_kord": "A place is confirmed by message. We check in the day before.",
     "jalus": "Soundbath"
+  },
+  "ru": {
+    "eyebrow": "варган · диджериду · поющие чаши",
+    "lead": "Звук слышно — и чувствуешь в теле.",
+    "nav_tulekul": "Когда",
+    "nav_mis": "Что это",
+    "nav_kuidas": "Стоит знать",
+    "nav_pildid": "Фото",
+    "nav_kontakt": "Контакт",
+    "jargmine": "Следующее путешествие",
+    "tulekul": "Ближайшие даты",
+    "laen": "Загружаю список…",
+    "tyhi": "Новая дата появится скоро.",
+    "tais": "мест нет",
+    "viga": "Список не удалось загрузить.",
+    "mis": "Низкочастотное соматическо-виброакустическое звуковое путешествие",
+    "pikemalt": "Подробнее",
+    "kuidas": "Стоит знать",
+    "muud": "Другие возможности",
+    "pildid": "Фото",
+    "pildid_mark": "ФОТО",
+    "kontakt": "Контакт",
+    "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
+    "telefon": "Телефон",
+    "kontakt_kord": "Место подтверждаем сообщением — письмом или SMS.",
+    "jalus": "Kahe Vahel"
   }
 }
