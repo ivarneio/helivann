@@ -406,10 +406,7 @@
     </details>
 
     <h2 id="pildid" data-i="pildid">Pildid</h2>
-    <div class="gallery">
-      <img src="hero.jpg" alt="">
-      <img src="kausid.jpg" alt="">
-    </div>
+    <div class="gallery" id="galerii"></div>
     <p class="empty" data-i="pildid_mark" style="margin-top:.7rem"></p>
 
     <h2 id="kontakt" data-i="kontakt">Kontakt</h2>
@@ -579,20 +576,34 @@
       avaKoht(location.hash.replace("#", ""));
     }
 
-    (function galeriiVaade() {
+    function ehitaGalerii(nimed) {
+      const kast = document.getElementById("galerii");
+      if (!kast) return;
+      kast.innerHTML = (nimed || []).map(n => {
+        const fail = (typeof n === "string") ? n : (n.fail || "");
+        if (!fail) return "";
+        return '<img src="pildid/' + fail + '" alt="">';
+      }).join("");
+      galeriiVaade();
+    }
+
+    function galeriiVaade() {
       const kaaned = [...document.querySelectorAll(".gallery img")];
       const kast = document.getElementById("vaade");
       const suur = document.getElementById("vaadePilt");
       const riba = document.getElementById("vaadeRiba");
-      if (!kaaned.length || !kast) return;
+      if (!kast || !suur || !riba) return;
+      riba.innerHTML = "";
+      if (!kaaned.length) return;
       let i = 0;
 
       kaaned.forEach((img, n) => {
-        const t = document.createElement("img");
-        t.src = img.src;
-        t.alt = "";
-        t.addEventListener("click", () => naita(n));
-        riba.appendChild(t);
+        const th = document.createElement("img");
+        th.src = img.src;
+        th.alt = "";
+        th.addEventListener("click", () => naita(n));
+        riba.appendChild(th);
+        img.onclick = () => naita(n);
       });
 
       function naita(n) {
@@ -602,7 +613,7 @@
           suur.src = kaaned[i].src;
           suur.classList.add("nahtav");
         }, 180);
-        riba.querySelectorAll("img").forEach((t, k) => t.classList.toggle("aktiivne", k === i));
+        riba.querySelectorAll("img").forEach((th, k) => th.classList.toggle("aktiivne", k === i));
         kast.classList.add("sees");
         document.body.style.overflow = "hidden";
       }
@@ -611,28 +622,29 @@
         document.body.style.overflow = "";
       }
 
-      kaaned.forEach((img, n) => img.addEventListener("click", () => naita(n)));
-      document.getElementById("vaadeSulge").addEventListener("click", sulge);
-      kast.addEventListener("click", (e) => { if (e.target === kast) sulge(); });
+      document.getElementById("vaadeSulge").onclick = sulge;
+      kast.onclick = (e) => { if (e.target === kast) sulge(); };
       document.addEventListener("keydown", (e) => {
         if (!kast.classList.contains("sees")) return;
         if (e.key === "Escape") sulge();
         if (e.key === "ArrowRight") naita(i + 1);
         if (e.key === "ArrowLeft") naita(i - 1);
       });
-    })();
+    }
 
     Promise.all([
       fetch("tekstid.json", { cache: "no-store" }).then(r => r.json()),
       fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []),
       fetch("seaded.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({})),
-      fetch("sisu.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({ et: {}, en: {} }))
-    ]).then(([tekstid, rows, s, sisuFail]) => {
+      fetch("sisu.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({ et: {}, en: {} })),
+      fetch("pildid.json", { cache: "no-store" }).then(r => r.json()).catch(() => [])
+    ]).then(([tekstid, rows, s, sisuFail, pildid]) => {
       T = tekstid;
       rowsCache = rows;
       seaded = Object.assign(seaded, s);
       sisu = sisuFail;
       apply();
+      ehitaGalerii(pildid);
     }).catch(() => {
       document.getElementById("jargmine").textContent = "Listi ei saanud laadida.";
     });
