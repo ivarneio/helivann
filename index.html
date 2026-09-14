@@ -27,7 +27,10 @@
       --dark: #1a110d;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      font-size: clamp(15px, 0.35vw + 14.2px, 18px);
+    }
     body {
       margin: 0;
       font-family: "Source Sans 3", system-ui, sans-serif;
@@ -116,12 +119,12 @@
     }
     .hero h1 {
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      font-size: clamp(2.1rem, 4.2vw + 1rem, 3.8rem);
       font-weight: 500;
       line-height: 1.05;
       margin: 0 0 .55rem;
     }
-    .hero .lead { margin: 0 0 1.3rem; font-size: 1.12rem; max-width: 22rem; opacity: .92; }
+    .hero .lead { margin: 0 0 1.3rem; font-size: clamp(1rem, 0.6vw + 0.92rem, 1.25rem); max-width: 22rem; opacity: .92; }
     nav.toc {
       display: flex;
       flex-wrap: wrap;
@@ -167,7 +170,7 @@
     }
     h2 {
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.65rem;
+      font-size: clamp(1.35rem, 1.2vw + 1.1rem, 1.85rem);
       font-weight: 500;
       margin: 2.1rem 0 .8rem;
     }
