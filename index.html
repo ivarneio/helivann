@@ -274,7 +274,7 @@
       height: auto;
       object-fit: contain;
       opacity: 0;
-      transition: opacity .7s ease;
+      transition: opacity .2s ease;
     }
     .vaade-suur img.nahtav { opacity: 1; }
     .vaade-sulge {
@@ -544,11 +544,13 @@
         }
         el.scrollIntoView({ behavior: "smooth", block: "start" });
         kuiKeriLopp(() => {
-          if (el.tagName !== "DETAILS") return;
-          el.open = true;
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => el.classList.add("avatud"));
-          });
+          if (el.tagName === "DETAILS") {
+            el.open = true;
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => el.classList.add("avatud"));
+            });
+          }
+          if (id === "pildid" && window.avaaGalerii) window.avaaGalerii(0);
         });
       });
     }
@@ -608,6 +610,16 @@
       riba.innerHTML = "";
       if (!kaaned.length) return;
       let i = 0;
+      let taimer = null;
+
+      function seiska() {
+        if (taimer) { clearInterval(taimer); taimer = null; }
+      }
+      function kaivita() {
+        seiska();
+        if (kaaned.length < 2) return;
+        taimer = setInterval(() => naita(i + 1, false), 2200);
+      }
 
       kaaned.forEach((img, n) => {
         const th = document.createElement("img");
@@ -618,18 +630,20 @@
         img.onclick = () => naita(n);
       });
 
-      function naita(n) {
+      function naita(n, restart) {
         i = (n + kaaned.length) % kaaned.length;
         suur.classList.remove("nahtav");
         setTimeout(() => {
           suur.src = kaaned[i].src;
           suur.classList.add("nahtav");
-        }, 180);
+        }, 200);
         riba.querySelectorAll("img").forEach((th, k) => th.classList.toggle("aktiivne", k === i));
         kast.classList.add("sees");
         document.body.style.overflow = "hidden";
+        if (restart !== false) kaivita();
       }
       function sulge() {
+        seiska();
         kast.classList.remove("sees");
         document.body.style.overflow = "";
       }
@@ -642,6 +656,8 @@
         if (e.key === "ArrowRight") naita(i + 1);
         if (e.key === "ArrowLeft") naita(i - 1);
       });
+
+      window.avaaGalerii = function (n) { naita(n == null ? 0 : n); };
     }
 
     Promise.all([
