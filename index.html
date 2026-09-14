@@ -35,6 +35,17 @@
       color: var(--ink);
       line-height: 1.6;
     }
+    .riba {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .55rem 1.15rem;
+      gap: 1rem;
+    }
     .hero {
       position: relative;
       min-height: 88vh;
@@ -54,7 +65,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.15rem 0;
       gap: 1rem;
     }
     .logo {
@@ -323,7 +333,7 @@
   </style>
 </head>
 <body>
-  <header class="hero">
+  <div class="riba">
     <div class="hero-top">
       <a class="logo" href="./" id="logo" aria-label="Helivann avaleht">
         <img src="parmu.jpg" alt="Helivann">
@@ -343,6 +353,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <header class="hero">
     <div class="hero-inner">
       <p class="eyebrow" data-i="eyebrow">Kehra · parmupill · didgeridoo · kausid</p>
       <h1>Kahe Vahel</h1>
