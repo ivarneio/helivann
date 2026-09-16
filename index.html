@@ -506,6 +506,25 @@
       .raamat-paber { padding: 1.05rem 1.15rem 2.35rem; }
       .raamat-paber p { font-size: .98rem; line-height: 1.3; margin-bottom: .38rem; }
     }
+
+    details.acc.laval,
+    #pildid.laval,
+    #kontakt.laval {
+      margin-top: 42vh;
+      margin-bottom: 42vh;
+      transition: margin .85s ease;
+    }
+    #pildid.laval + .gallery {
+      margin-bottom: 42vh;
+      transition: margin .85s ease;
+    }
+    #kontakt.laval + .contact {
+      margin-bottom: 42vh;
+      transition: margin .85s ease;
+    }
+    details.acc, #pildid, #kontakt, .gallery, .contact {
+      transition: margin .85s ease;
+    }
     a { color: var(--ink); }
   </style>
 </head>
@@ -735,6 +754,8 @@
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
+      document.querySelectorAll(".laval").forEach(n => n.classList.remove("laval"));
+      el.classList.add("laval");
       sulgeTeised(id).then(() => {
         if (el.tagName === "DETAILS") {
           el.open = false;
@@ -760,6 +781,7 @@
         if (d.open || d.classList.contains("avatud")) {
           d.classList.remove("avatud");
           setTimeout(() => { d.open = false; }, 850);
+          document.querySelectorAll(".laval").forEach(n => n.classList.remove("laval"));
         } else {
           avaKoht(d.id);
         }
@@ -769,6 +791,7 @@
     document.getElementById("logo").addEventListener("click", (e) => {
       e.preventDefault();
       history.replaceState(null, "", "./");
+      document.querySelectorAll(".laval").forEach(n => n.classList.remove("laval"));
       sulgeTeised("").then(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
