@@ -413,8 +413,8 @@
     .raamat-nool.parem { right: .45rem; top: auto; bottom: .45rem; transform: none; }
     .raamat-vihje {
       position: absolute;
-      left: 3.4rem;
-      right: 3.4rem;
+      left: 1.2rem;
+      right: 1.2rem;
       bottom: .42rem;
       z-index: 4;
       display: flex;
@@ -444,6 +444,33 @@
       0%, 100% { opacity: .35; transform: scale(.88); }
       50% { opacity: 1; transform: scale(1.22); }
     }
+    .raamat-vihje {
+      pointer-events: none;
+    }
+    .raamat-sona {
+      pointer-events: auto;
+      background: none;
+      border: 0;
+      padding: .15rem .35rem;
+      cursor: pointer;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: #1a110d;
+      text-shadow: 0 0 8px rgba(226,195,154,.95), 0 0 16px rgba(226,195,154,.5);
+      animation: vihjeKasv 1.5s ease-in-out infinite;
+    }
+    .raamat-sona.vasak { animation-delay: .18s; }
+    .raamat-sona.parem { animation-delay: 0s; }
+    .raamat-sona:disabled {
+      opacity: .22;
+      cursor: default;
+      animation: none;
+      text-shadow: none;
+    }
+    .raamat-paber p { font-size: 1rem; }
+
     .raamat-lava {
       width: min(38rem, 86vw);
       height: min(72vh, 40rem);
@@ -498,7 +525,8 @@
       }
       .raamat-nool.vasak { left: .28rem; bottom: .32rem; }
       .raamat-nool.parem { right: .28rem; bottom: .32rem; }
-      .raamat-vihje { font-size: 1.7rem; left: 3.3rem; right: 3.3rem; bottom: .38rem; }
+      .raamat-vihje { left: 1.1rem; right: 1.1rem; bottom: .38rem; }
+      .raamat-sona { font-size: 1.7rem; }
       .raamat-lava {
         width: min(92vw, 38rem);
         height: min(74vh, 40rem);
@@ -623,12 +651,14 @@
 
   <div class="raamat" id="raamat" aria-hidden="true">
     <button type="button" class="raamat-sulge" id="raamatSulge" aria-label="Sulge">×</button>
-    <button type="button" class="raamat-nool vasak" id="raamatVasak" aria-label="Eelmine">‹</button>
-    <button type="button" class="raamat-nool parem" id="raamatParem" aria-label="Järgmine">›</button>
+
     <div class="raamat-lava" id="raamatLava">
       <div class="raamat-paber all" id="raamatAll"></div>
       <div class="raamat-paber peal" id="raamatPeal"></div>
-      <div class="raamat-vihje" id="raamatVihje" aria-hidden="true"><span class="pool vasak"><span class="kasv">‹</span><span class="kasv">‹</span><span class="kasv">‹</span></span><span class="pool parem"><span class="kasv">›</span><span class="kasv">›</span><span class="kasv">›</span></span></div>
+      <div class="raamat-vihje" id="raamatVihje">
+        <button type="button" class="raamat-sona vasak" id="raamatVasak" data-i="raamat_tagasi">Tagasi</button>
+        <button type="button" class="raamat-sona parem" id="raamatParem" data-i="raamat_edasi">Edasi</button>
+      </div>
     </div>
   </div>
 
