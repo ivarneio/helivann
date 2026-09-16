@@ -978,18 +978,22 @@
         naitaLeht(all, j);
         peal.classList.remove("edasi", "tagasi");
         void peal.offsetWidth;
-        setTimeout(() => {
-          peal.classList.add(suund > 0 ? "edasi" : "tagasi");
-        }, 80);
+        const klass = suund > 0 ? "tagasi" : "edasi";
+        let valmisPoore = false;
         const lopeta = () => {
+          if (valmisPoore) return;
+          valmisPoore = true;
           peal.removeEventListener("animationend", lopeta);
           i = j;
           naitaLeht(peal, i);
           peal.classList.remove("edasi", "tagasi");
+          peal.style.transform = "";
           poore = false;
           nooled();
         };
         peal.addEventListener("animationend", lopeta);
+        setTimeout(() => peal.classList.add(klass), 80);
+        setTimeout(lopeta, 1400);
       }
       function ava() {
         const tekst = (sisu[lang] && sisu[lang].mis_veel) || (sisu.et && sisu.et.mis_veel) || "";
@@ -997,10 +1001,16 @@
         kast.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
         i = 0;
-        requestAnimationFrame(() => {
-          lehed = lehekuljesta(tekst);
+        peal.classList.remove("edasi", "tagasi");
+        peal.style.transform = "";
+        lehed = [laused(tekst)];
+        valmis();
+        setTimeout(() => {
+          const leitud = lehekuljesta(tekst);
+          lehed = leitud && leitud.length ? leitud : [laused(tekst)];
+          if (i >= lehed.length) i = 0;
           valmis();
-        });
+        }, 120);
       }
       function sulge() {
         kast.classList.remove("sees");
@@ -1021,7 +1031,7 @@
         const dx = e.changedTouches[0].clientX - touchX;
         touchX = null;
         if (Math.abs(dx) < 40) return;
-        keera(dx < 0 ? 1 : -1);
+        keera(dx < 0 ? -1 : 1);
       }, { passive: true });
       document.addEventListener("keydown", (e) => {
         if (!kast.classList.contains("sees")) return;
