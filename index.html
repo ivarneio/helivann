@@ -533,11 +533,20 @@
       border-width: 0;
       pointer-events: none;
     }
+    body.uks-vaade main.wrap {
+      min-height: calc(100svh - 4.75rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     body.uks-vaade details.acc.laval,
     body.uks-vaade .lava-yks.laval {
       opacity: 1;
       transform: none;
-      max-height: 2000px;
+      max-height: none;
+      width: 100%;
+      margin-top: 0;
+      margin-bottom: 0;
     }
     .lava-yks h2 { margin-top: 0; }
     a { color: var(--ink); }
