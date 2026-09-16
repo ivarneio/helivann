@@ -359,6 +359,7 @@
       100% { transform: translateX(0); }
     }
     .contact p { margin: .35rem 0; color: var(--muted); }
+    [data-i="muud_tekst"] { white-space: pre-line; }
     footer {
       background: var(--dark);
       color: #e8d8c6;
@@ -506,6 +507,39 @@
       .raamat-paber { padding: 1.05rem 1.15rem 2.35rem; }
       .raamat-paber p { font-size: .98rem; line-height: 1.3; margin-bottom: .38rem; }
     }
+
+    body.uks-vaade .hero,
+    body.uks-vaade footer {
+      opacity: 0;
+      transform: translateY(-1.4rem);
+      max-height: 0;
+      overflow: hidden;
+      margin: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      pointer-events: none;
+    }
+    .hero, footer, details.acc, .lava-yks {
+      transition: opacity .85s ease, transform .85s ease, max-height .85s ease, margin .85s ease, padding .85s ease;
+    }
+    body.uks-vaade details.acc:not(.laval),
+    body.uks-vaade .lava-yks:not(.laval) {
+      opacity: 0;
+      transform: translateY(1.6rem);
+      max-height: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      border-width: 0;
+      pointer-events: none;
+    }
+    body.uks-vaade details.acc.laval,
+    body.uks-vaade .lava-yks.laval {
+      opacity: 1;
+      transform: none;
+      max-height: 2000px;
+    }
+    .lava-yks h2 { margin-top: 0; }
     a { color: var(--ink); }
   </style>
 </head>
@@ -602,16 +636,20 @@
       </div>
     </details>
 
-    <h2 id="pildid" data-i="pildid">Pildid</h2>
-    <div class="gallery" id="galerii"></div>
-    <p class="empty" data-i="pildid_mark" style="margin-top:.7rem"></p>
+    <section class="lava-yks" id="pildid">
+      <h2 data-i="pildid">Pildid</h2>
+      <div class="gallery" id="galerii"></div>
+      <p class="empty" data-i="pildid_mark" style="margin-top:.7rem"></p>
+    </section>
 
-    <h2 id="kontakt" data-i="kontakt">Kontakt</h2>
-    <div class="contact">
-      <p data-i="kontakt_kes">Ivar Neio, Kehra</p>
-      <p data-i="telefon">Telefon: lisa number</p>
-      <p data-i="kontakt_kord"></p>
-    </div>
+    <section class="lava-yks" id="kontakt">
+      <h2 data-i="kontakt">Kontakt</h2>
+      <div class="contact">
+        <p data-i="kontakt_kes">Ivar Neio, Kehra</p>
+        <p data-i="telefon">Telefon: lisa number</p>
+        <p data-i="kontakt_kord"></p>
+      </div>
+    </section>
   </main>
 
   <div class="vaade" id="vaade">
@@ -732,24 +770,33 @@
       });
     }
 
+    function naitaAinult(id) {
+      document.body.classList.add("uks-vaade");
+      document.querySelectorAll(".laval").forEach(el => el.classList.remove("laval"));
+      const el = document.getElementById(id);
+      if (el) el.classList.add("laval");
+    }
+
+    function avaleht() {
+      document.body.classList.remove("uks-vaade");
+      document.querySelectorAll(".laval").forEach(el => el.classList.remove("laval"));
+    }
+
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
+      naitaAinult(id);
       sulgeTeised(id).then(() => {
         if (el.tagName === "DETAILS") {
-          el.open = false;
-          el.classList.remove("avatud");
+          el.open = true;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => el.classList.add("avatud"));
+          });
         }
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        kuiKeriLopp(() => {
-          if (el.tagName === "DETAILS") {
-            el.open = true;
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => el.classList.add("avatud"));
-            });
-          }
-          if (id === "pildid" && window.avaaGalerii) window.avaaGalerii(0);
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (id === "pildid" && window.avaaGalerii) {
+          setTimeout(() => window.avaaGalerii(0), 500);
+        }
       });
     }
 
@@ -760,6 +807,7 @@
         if (d.open || d.classList.contains("avatud")) {
           d.classList.remove("avatud");
           setTimeout(() => { d.open = false; }, 850);
+          avaleht();
         } else {
           avaKoht(d.id);
         }
@@ -769,6 +817,7 @@
     document.getElementById("logo").addEventListener("click", (e) => {
       e.preventDefault();
       history.replaceState(null, "", "./");
+      avaleht();
       sulgeTeised("").then(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
