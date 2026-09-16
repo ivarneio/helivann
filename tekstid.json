@@ -23,7 +23,9 @@
     "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
     "telefon": "Telefon",
     "kontakt_kord": "Koht kinnitatakse sõnumiga kas emaili või SMS'ga. ",
-    "jalus": "Helivann"
+    "jalus": "Helivann",
+    "raamat_tagasi": "Tagasi",
+    "raamat_edasi": "Edasi"
   },
   "en": {
     "eyebrow": "Kehra · jew's harp · didgeridoo · crystal bowls",
@@ -49,7 +51,9 @@
     "kontakt_kes": "Ivar Neio, Kehra",
     "telefon": "Phone",
     "kontakt_kord": "A place is confirmed by message. We check in the day before.",
-    "jalus": "Soundbath"
+    "jalus": "Soundbath",
+    "raamat_tagasi": "Back",
+    "raamat_edasi": "Next"
   },
   "ru": {
     "eyebrow": "варган · диджериду · поющие чаши",
@@ -75,6 +79,8 @@
     "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
     "telefon": "Телефон",
     "kontakt_kord": "Место подтверждаем сообщением — письмом или SMS.",
-    "jalus": "Kahe Vahel"
+    "jalus": "Kahe Vahel",
+    "raamat_tagasi": "Назад",
+    "raamat_edasi": "Дальше"
   }
 }
