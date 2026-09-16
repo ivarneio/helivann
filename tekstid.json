@@ -4,7 +4,7 @@
     "lead": "Heli on kuulda ja kehas tunda.",
     "nav_tulekul": "Tulekul",
     "nav_mis": "Mis see on",
-    "nav_kuidas": "Tasub teada",
+    "nav_kuidas": "Huvitav teada",
     "nav_pildid": "Pildid",
     "nav_kontakt": "Kontakt",
     "jargmine": "Järgmine rännak",
@@ -15,7 +15,7 @@
     "viga": "Listi ei saanud laadida.",
     "mis": "Madalsageduslik somaatilis-vibroakustiline helirännak",
     "pikemalt": "Pikemalt",
-    "kuidas": "Tasub teada",
+    "kuidas": "Huvitav teada",
     "muud": "Teised võimalused",
     "pildid": "Pildid",
     "pildid_mark": "FOTOD",
@@ -25,14 +25,15 @@
     "kontakt_kord": "Koht kinnitatakse sõnumiga kas emaili või SMS'ga. ",
     "jalus": "Helivann",
     "raamat_tagasi": "Tagasi",
-    "raamat_edasi": "Edasi"
+    "raamat_edasi": "Edasi",
+    "nav_muud": "Teised võimalused"
   },
   "en": {
     "eyebrow": "Kehra · jew's harp · didgeridoo · crystal bowls",
     "lead": "Sound you hear — and feel in the body.",
     "nav_tulekul": "Dates",
     "nav_mis": "What it is",
-    "nav_kuidas": "Good to know",
+    "nav_kuidas": "Worth reading",
     "nav_pildid": "Photos",
     "nav_kontakt": "Contact",
     "jargmine": "Next journey",
@@ -43,7 +44,7 @@
     "viga": "Could not load the list.",
     "mis": "Low-frequency somatic-vibroacoustic sound journey",
     "pikemalt": "Read more",
-    "kuidas": "Good to know",
+    "kuidas": "Worth reading",
     "muud": "Other options",
     "pildid": "Photos",
     "pildid_mark": "Your own photos will come here too.",
@@ -53,14 +54,15 @@
     "kontakt_kord": "A place is confirmed by message. We check in the day before.",
     "jalus": "Soundbath",
     "raamat_tagasi": "Back",
-    "raamat_edasi": "Next"
+    "raamat_edasi": "Next",
+    "nav_muud": "Other options"
   },
   "ru": {
     "eyebrow": "варган · диджериду · поющие чаши",
     "lead": "Звук слышно — и чувствуешь в теле.",
     "nav_tulekul": "Когда",
     "nav_mis": "Что это",
-    "nav_kuidas": "Стоит знать",
+    "nav_kuidas": "Интересно знать",
     "nav_pildid": "Фото",
     "nav_kontakt": "Контакт",
     "jargmine": "Следующее путешествие",
@@ -71,7 +73,7 @@
     "viga": "Список не удалось загрузить.",
     "mis": "Низкочастотное соматическо-виброакустическое звуковое путешествие",
     "pikemalt": "Подробнее",
-    "kuidas": "Стоит знать",
+    "kuidas": "Интересно знать",
     "muud": "Другие возможности",
     "pildid": "Фото",
     "pildid_mark": "ФОТО",
@@ -81,6 +83,7 @@
     "kontakt_kord": "Место подтверждаем сообщением — письмом или SMS.",
     "jalus": "Kahe Vahel",
     "raamat_tagasi": "Назад",
-    "raamat_edasi": "Дальше"
+    "raamat_edasi": "Дальше",
+    "nav_muud": "Другие возможности"
   }
 }
