@@ -358,7 +358,9 @@
       50% { transform: translateX(-35%); }
       100% { transform: translateX(0); }
     }
-    .contact p { margin: .35rem 0; color: var(--muted); }
+    .contact { font-size: 1.22rem; }
+    .contact p { margin: .45rem 0; color: var(--ink); }
+    .contact a, .contact strong { font-weight: 700; color: var(--ink); }
     footer {
       background: var(--dark);
       color: #e8d8c6;
@@ -679,9 +681,15 @@
         const nr = (seaded.telefon || "").trim();
         telEl.textContent = pack.telefon + (nr ? ": " + nr : "");
         if (nr) {
-          telEl.innerHTML = pack.telefon + ": <a href='tel:" + nr.replace(/\s/g, "") + "'>" + nr + "</a>";
+          telEl.innerHTML = pack.telefon + ": <strong><a href='tel:" + nr.replace(/\s/g, "") + "'>" + nr + "</a></strong>";
         }
       }
+      document.querySelectorAll(".contact p").forEach(el => {
+        el.innerHTML = el.innerHTML.replace(
+          /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+          '<strong><a href="mailto:$1">$1</a></strong>'
+        );
+      });
       const fb = document.getElementById("link-fb");
       const ig = document.getElementById("link-ig");
       if (fb) fb.href = seaded.facebook || "#";
