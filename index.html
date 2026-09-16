@@ -162,7 +162,7 @@
         border-bottom: 1px solid rgba(246,238,226,.15);
         padding: .55rem 0;
       }
-      #tulekul, #mis, #kuidas, #pildid, #kontakt {
+      #tulekul, #mis, #kuidas, #muud, #pildid, #kontakt {
         scroll-margin-top: 4.75rem;
       }
     }
@@ -544,6 +544,7 @@
         <a href="#tulekul" data-i="nav_tulekul">Tulekul</a>
         <a href="#mis" data-i="nav_mis">Mis see on</a>
         <a href="#kuidas" data-i="nav_kuidas">Kuidas tulla</a>
+        <a href="#muud" data-i="nav_muud">Teised võimalused</a>
         <a href="#pildid" data-i="nav_pildid">Pildid</a>
         <a href="#kontakt" data-i="nav_kontakt">Kontakt</a>
       </nav>
@@ -610,18 +611,17 @@
     </details>
 
     <details class="acc" id="kuidas">
-      <summary data-i="kuidas">Kuidas tulla</summary>
+      <summary data-i="kuidas">Huvitav teada</summary>
+      <div class="acc-clip">
+      <div class="body" id="huvitavSisu"></div>
+      </div>
+    </details>
+
+    <details class="acc" id="muud">
+      <summary data-i="muud">Teised võimalused</summary>
       <div class="acc-clip">
       <div class="body">
-        <p data-i="kuidas_lyhi"></p>
-        <p data-i="kuidas_kestus"></p>
-        <p data-i="kuidas_ei"></p>
-        <details class="inner">
-          <summary data-i="muud">Teised võimalused</summary>
-          <div class="body">
-            <p data-i="muud_tekst"></p>
-          </div>
-        </details>
+        <p data-i="muud_tekst" style="white-space:pre-line"></p>
       </div>
       </div>
     </details>
@@ -693,6 +693,20 @@
       const ig = document.getElementById("link-ig");
       if (fb) fb.href = seaded.facebook || "#";
       if (ig) ig.href = seaded.instagram || "#";
+      const kast = document.getElementById("huvitavSisu");
+      if (kast) {
+        const p = sisu[lang] || sisu.et || {};
+        const read = (lang === "et") ? "Ava artikkel" : (lang === "ru") ? "Открыть статью" : "Open article";
+        let html = "";
+        for (let n = 1; n <= 3; n++) {
+          const txt = p["huvitav_" + n] || "";
+          const url = p["huvitav_" + n + "_url"] || "";
+          if (!txt) continue;
+          html += "<p>" + txt + "</p>";
+          if (url) html += "<p><a href='" + url + "' target='_blank' rel='noopener'>" + read + "</a></p>";
+        }
+        kast.innerHTML = html;
+      }
       renderList();
     }
     function renderList() {
