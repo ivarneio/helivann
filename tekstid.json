@@ -1,9 +1,9 @@
 {
   "et": {
-    "eyebrow": "parmupill · didgeridoo · helikausid",
+    "eyebrow": "trumm · parmupill · didgeridoo · helikausid",
     "lead": "Heli on kuulda ja kehas tunda.",
     "nav_tulekul": "Tulekul",
-    "nav_mis": "Mis see on",
+    "nav_mis": "Helirännak",
     "nav_kuidas": "Huvitav teada",
     "nav_pildid": "Pildid",
     "nav_kontakt": "Kontakt",
@@ -29,10 +29,10 @@
     "nav_muud": "Teised võimalused"
   },
   "en": {
-    "eyebrow": "Kehra · jew's harp · didgeridoo · crystal bowls",
+    "eyebrow": "drum · jew's harp · didgeridoo · crystal bowls",
     "lead": "Sound you hear — and feel in the body.",
     "nav_tulekul": "Dates",
-    "nav_mis": "What it is",
+    "nav_mis": "Sound journey",
     "nav_kuidas": "Worth reading",
     "nav_pildid": "Photos",
     "nav_kontakt": "Contact",
@@ -52,16 +52,16 @@
     "kontakt_kes": "Ivar Neio, Kehra",
     "telefon": "Phone",
     "kontakt_kord": "A place is confirmed by message. We check in the day before.",
-    "jalus": "Soundbath",
+    "jalus": "Sound journey · drum, jew's harp, didgeridoo, crystal bowls",
     "raamat_tagasi": "Back",
     "raamat_edasi": "Next",
     "nav_muud": "Other options"
   },
   "ru": {
-    "eyebrow": "варган · диджериду · поющие чаши",
+    "eyebrow": "барабан · варган · диджериду · поющие чаши",
     "lead": "Звук слышно — и чувствуешь в теле.",
     "nav_tulekul": "Когда",
-    "nav_mis": "Что это",
+    "nav_mis": "Звуковое путешествие",
     "nav_kuidas": "Интересно знать",
     "nav_pildid": "Фото",
     "nav_kontakt": "Контакт",
@@ -81,7 +81,7 @@
     "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
     "telefon": "Телефон",
     "kontakt_kord": "Место подтверждаем сообщением — письмом или SMS.",
-    "jalus": "Kahe Vahel",
+    "jalus": "Звуковое путешествие · барабан, варган, диджериду, поющие чаши",
     "raamat_tagasi": "Назад",
     "raamat_edasi": "Дальше",
     "nav_muud": "Другие возможности"
