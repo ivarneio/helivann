@@ -569,6 +569,7 @@
         <div class="langs">
           <button type="button" data-lang="et" class="on">ET</button>
           <button type="button" data-lang="ru">RU</button>
+          <button type="button" data-lang="tr">TR</button>
           <button type="button" data-lang="en">EN</button>
         </div>
       </div>
@@ -707,7 +708,7 @@
       const kast = document.getElementById("huvitavSisu");
       if (kast) {
         const p = sisu[lang] || sisu.et || {};
-        const read = (lang === "et") ? "Ava artikkel" : (lang === "ru") ? "Открыть статью" : "Open article";
+        const read = ({et:"Ava artikkel",ru:"Открыть статью",tr:"Yazıyı aç",en:"Open article"})[lang] || "Open article";
         let html = "";
         for (let n = 1; n <= 3; n++) {
           const txt = p["huvitav_" + n] || "";
