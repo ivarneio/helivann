@@ -179,7 +179,7 @@
     .wrap {
       width: min(40rem, calc(100% - 2.4rem));
       margin: 0 auto;
-      padding: 2.4rem 0 3.2rem;
+      padding: 2.4rem 0 70vh;
       font-size: 1rem;
     }
     h2 {
@@ -783,6 +783,13 @@
       });
     }
 
+    function keriPaiste(el) {
+      const riba = document.querySelector(".riba");
+      const vari = (riba ? riba.getBoundingClientRect().height : 64) + 10;
+      const y = el.getBoundingClientRect().top + window.scrollY - vari;
+      window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    }
+
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -791,7 +798,7 @@
           el.open = false;
           el.classList.remove("avatud");
         }
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        keriPaiste(el);
         kuiKeriLopp(() => {
           if (el.tagName === "DETAILS") {
             el.open = true;
@@ -799,6 +806,7 @@
               requestAnimationFrame(() => el.classList.add("avatud"));
             });
           }
+          keriPaiste(el);
           if (id === "pildid" && window.avaaGalerii) window.avaaGalerii(0);
         });
       });
