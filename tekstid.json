@@ -1,7 +1,7 @@
 {
   "et": {
     "eyebrow": "trumm · parmupill · didgeridoo · helikausid",
-    "lead": "Heli on kuulda ja kehas tunda.",
+    "lead": "Heli, mida kuuled kehaga.",
     "nav_tulekul": "Tulekul",
     "nav_mis": "Helirännak",
     "nav_kuidas": "Huvitav teada",
@@ -30,7 +30,7 @@
   },
   "en": {
     "eyebrow": "drum · jew's harp · didgeridoo · crystal bowls",
-    "lead": "Sound you hear — and feel in the body.",
+    "lead": "Sound you hear with the body.",
     "nav_tulekul": "Dates",
     "nav_mis": "Sound journey",
     "nav_kuidas": "Worth reading",
@@ -59,7 +59,7 @@
   },
   "ru": {
     "eyebrow": "барабан · варган · диджериду · поющие чаши",
-    "lead": "Звук слышно — и чувствуешь в теле.",
+    "lead": "Звук, который слышишь телом.",
     "nav_tulekul": "Когда",
     "nav_mis": "Звуковое путешествие",
     "nav_kuidas": "Интересно знать",
