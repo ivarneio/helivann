@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kahe Vahel — helirännak</title>
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch.png">
   <meta name="description" content="Madalsageduslik helirännak. Heli, mida kuuled kehaga. Parmupill, didgeridoo, kristallkausid. Kehra.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kahe Vahel — helirännak">
@@ -278,13 +281,12 @@
       cursor: pointer;
     }
     .gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .55rem;
+      display: block;
+      max-width: 28rem;
     }
     .gallery img {
       width: 100%;
-      height: 10rem;
+      height: 14rem;
       object-fit: cover;
       border-radius: 8px;
       display: block;
@@ -843,23 +845,24 @@
     function ehitaGalerii(nimed) {
       const kast = document.getElementById("galerii");
       if (!kast) return;
-      kast.innerHTML = (nimed || []).map(n => {
-        const fail = (typeof n === "string") ? n : (n.fail || "");
-        if (!fail) return "";
-        return '<img src="pildid/' + fail + '" alt="">';
-      }).join("");
-      galeriiVaade();
+      const failid = (nimed || []).map(n => (typeof n === "string") ? n : (n.fail || "")).filter(Boolean);
+      window._galFailid = failid;
+      kast.innerHTML = failid.length ? '<img src="pildid/' + failid[0] + '" alt="">' : "";
+      galeriiVaade(failid);
       raamatToo();
     }
 
-    function galeriiVaade() {
-      const kaaned = [...document.querySelectorAll(".gallery img")];
+    function galeriiVaade(failid) {
       const kast = document.getElementById("vaade");
       const suur = document.getElementById("vaadePilt");
       const riba = document.getElementById("vaadeRiba");
       if (!kast || !suur || !riba) return;
       riba.innerHTML = "";
+      const kaaned = (failid && failid.length ? failid : (window._galFailid || [])).map(f => ({ src: "pildid/" + f }));
+      const uks = document.querySelector(".gallery img");
+      if (uks) uks.onclick = () => naitaStart(0);
       if (!kaaned.length) return;
+      function naitaStart(n) { if (window.avaaGalerii) window.avaaGalerii(n); }
       let i = 0;
       let taimer = null;
 
@@ -878,8 +881,9 @@
         th.alt = "";
         th.addEventListener("click", () => naita(n));
         riba.appendChild(th);
-        img.onclick = () => naita(n);
       });
+      const uksPilt = document.querySelector(".gallery img");
+      if (uksPilt) uksPilt.onclick = () => naita(0);
 
       function naita(n, restart) {
         i = (n + kaaned.length) % kaaned.length;
