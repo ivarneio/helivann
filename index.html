@@ -794,15 +794,34 @@
       window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
     }
 
+    function jalusPadi(on) {
+      const w = document.querySelector(".wrap");
+      if (!w) return;
+      if (window.matchMedia("(max-width: 820px)").matches) {
+        w.style.paddingBottom = on ? "2rem" : "";
+      } else {
+        w.style.paddingBottom = "";
+      }
+    }
+
+    function keriJalusNaha() {
+      const foot = document.querySelector("footer");
+      if (!foot) return;
+      const y = foot.getBoundingClientRect().bottom + window.scrollY - window.innerHeight + 6;
+      window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    }
+
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
+      jalusPadi(id === "kontakt");
       sulgeTeised(id).then(() => {
         if (el.tagName === "DETAILS") {
           el.open = false;
           el.classList.remove("avatud");
         }
-        keriPaiste(el);
+        if (id === "kontakt") keriJalusNaha();
+        else keriPaiste(el);
         kuiKeriLopp(() => {
           if (el.tagName === "DETAILS") {
             el.open = true;
@@ -810,7 +829,8 @@
               requestAnimationFrame(() => el.classList.add("avatud"));
             });
           }
-          keriPaiste(el);
+          if (id === "kontakt") keriJalusNaha();
+          else keriPaiste(el);
           if (id === "pildid" && window.avaaGalerii) window.avaaGalerii(0);
         });
       });
@@ -832,6 +852,7 @@
     document.getElementById("logo").addEventListener("click", (e) => {
       e.preventDefault();
       history.replaceState(null, "", "./");
+      jalusPadi(false);
       sulgeTeised("").then(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
