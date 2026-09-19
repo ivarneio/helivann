@@ -26,7 +26,7 @@
     "jalus": "Helirännak- Trumm, Parmupill, Didgeridoo, Laulvad kristallkausid",
     "raamat_tagasi": "Tagasi",
     "raamat_edasi": "Edasi",
-    "nav_muud": "Teised võimalused"
+    "nav_muud": "Privaatrännak"
   },
   "en": {
     "eyebrow": "drum · jew's harp · didgeridoo · singing bowls",
@@ -45,8 +45,8 @@
     "mis": "Low-frequency somatic-vibroacoustic sound journey",
     "pikemalt": "Longer",
     "kuidas": "Interesting to know",
-    "muud": "Other options",
-    "pildid": "Photos",
+    "muud": "Private journey",
+    "pildid": "Gallery",
     "pildid_mark": "PHOTOS",
     "kontakt": "Contact",
     "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
@@ -55,7 +55,7 @@
     "jalus": "Sound journey — Drum, Jew's harp, Didgeridoo, Singing crystal bowls",
     "raamat_tagasi": "Back",
     "raamat_edasi": "Next",
-    "nav_muud": "Other options"
+    "nav_muud": "Private journey"
   },
   "ru": {
     "eyebrow": "барабан · варган · диджериду · поющие чаши",
@@ -74,8 +74,8 @@
     "mis": "Низкочастотное соматическо-виброакустическое звуковое путешествие",
     "pikemalt": "Подробнее",
     "kuidas": "Интересно знать",
-    "muud": "Другие возможности",
-    "pildid": "Фото",
+    "muud": "Частное путешествие",
+    "pildid": "Галерея",
     "pildid_mark": "ФОТО",
     "kontakt": "Контакт",
     "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
@@ -84,7 +84,7 @@
     "jalus": "Звуковое путешествие — барабан, варган, диджериду, поющие кристаллические чаши",
     "raamat_tagasi": "Назад",
     "raamat_edasi": "Дальше",
-    "nav_muud": "Другие возможности"
+    "nav_muud": "Частное путешествие"
   },
   "tr": {
     "eyebrow": "davul · ağız kopuzu · didgeridoo · öten kaseler",
@@ -103,8 +103,8 @@
     "mis": "Düşük frekanslı somatik-vibroakustik ses yolculuğu",
     "pikemalt": "Daha uzun",
     "kuidas": "İlginç bilgiler",
-    "muud": "Diğer seçenekler",
-    "pildid": "Fotoğraflar",
+    "muud": "Özel yolculuk",
+    "pildid": "Galeri",
     "pildid_mark": "FOTOĞRAFLAR",
     "kontakt": "İletişim",
     "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
@@ -113,6 +113,6 @@
     "jalus": "Ses yolculuğu — davul, ağız kopuzu, didgeridoo, öten kristal kaseler",
     "raamat_tagasi": "Geri",
     "raamat_edasi": "İleri",
-    "nav_muud": "Diğer seçenekler"
+    "nav_muud": "Özel yolculuk"
   }
 }
