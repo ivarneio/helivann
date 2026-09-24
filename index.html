@@ -11,8 +11,8 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kahe Vahel — helirännak">
   <meta property="og:description" content="Heli, mida kuuled kehaga. Parmupill, didgeridoo, kristallkausid.">
-  <meta property="og:url" content="https://ivarneio.github.io/helivann/">
-  <meta property="og:image" content="https://ivarneio.github.io/helivann/og.jpg">
+  <meta property="og:url" content="https://ivar.neio.ee/soundbath/">
+  <meta property="og:image" content="https://ivar.neio.ee/soundbath/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -245,20 +245,6 @@
       text-align: left;
     }
     .sum-silt { line-height: 1.2; }
-    button.osalen {
-      flex-shrink: 0;
-      margin-left: auto;
-      margin-right: .35rem;
-      background: none;
-      border: 1px solid var(--accent);
-      color: var(--ink);
-      font-family: "Source Sans 3", sans-serif;
-      font-size: .92rem;
-      letter-spacing: .04em;
-      padding: .28rem .7rem;
-      border-radius: 999px;
-      cursor: pointer;
-    }
     #jargmine {
       font-family: "Source Sans 3", sans-serif;
       font-size: 1rem;
@@ -414,16 +400,14 @@
     }
     .contact p { margin: .35rem 0; color: var(--muted); }
     footer {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 35;
       background: var(--dark);
       color: #e8d8c6;
       padding: 1rem 1.2rem calc(1rem + env(safe-area-inset-bottom, 0px));
       text-align: center;
       font-size: .88rem;
-    }
-    footer {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      z-index: 35;
     }
     footer a { color: #f6eee2; text-decoration: none; font-size: 1.05rem; }
     span.tarn { color: #c0392b; font-weight: 700; font-size: .8em; }
@@ -670,18 +654,18 @@
             </div>
             <form id="soovVorm" class="soov-vorm peidus">
               <input type="text" name="hp" tabindex="-1" autocomplete="off" class="peidus" aria-hidden="true">
-              <label data-i="soov_nimi">Nimi <span class="tarn">*</span></label>
+              <label><span data-i="soov_nimi">Nimi</span> <span class="tarn">*</span></label>
               <input name="nimi" required autocomplete="name">
               <label data-i="soov_yritus">Milline rännak</label>
               <select name="yritus" id="soovYritus"></select>
               <p class="euro" id="soovEuro"></p>
-              <label data-i="soov_email">Email <span class="tarn">*</span></label>
+              <label><span data-i="soov_email">Email</span> <span class="tarn">*</span></label>
               <input name="email" type="email" required autocomplete="email" inputmode="email">
-              <label data-i="soov_telefon">Telefon <span class="tarn">*</span></label>
+              <label><span data-i="soov_telefon">Telefon</span> <span class="tarn">*</span></label>
               <input name="telefon" type="tel" required autocomplete="tel" inputmode="tel">
               <label class="rida">
                 <input type="checkbox" name="uudiskiri" id="soovUudis">
-                <span data-i="soov_uudis">Tahan emailile teadet järgmistest rännakutest. Siis on email vaja.</span>
+                <span data-i="soov_uudis">Tahan emailile teadet järgmistest rännakutest.</span>
               </label>
               <button type="submit" class="saada" data-i="soov_saada">Saada soov</button>
             </form>
@@ -1236,16 +1220,16 @@
 
 
     const SOOV_KEY = "soovInimene";
-    function yritusId(e, i) {
-      return e.id || ("U" + String(i + 1).padStart(3, "0"));
+    function yritusId(e, i) { return e.id || ("U" + String(i + 1).padStart(3, "0")); }
+    function tulevased() {
+      const tana = new Date();
+      const tanaStr = tana.getFullYear() + "-" + String(tana.getMonth()+1).padStart(2,"0") + "-" + String(tana.getDate()).padStart(2,"0");
+      return rowsCache.filter(e => (e.kuupaev || "") >= tanaStr).slice().sort((a, b) => (a.kuupaev || "").localeCompare(b.kuupaev || ""));
     }
     function taidaSoovValik() {
       const sel = document.getElementById("soovYritus");
       if (!sel) return;
-      const pack = T[lang] || T.et || {};
-      const tana = new Date();
-      const tanaStr = tana.getFullYear() + "-" + String(tana.getMonth()+1).padStart(2,"0") + "-" + String(tana.getDate()).padStart(2,"0");
-      const soon = rowsCache.filter(e => (e.kuupaev || "") >= tanaStr).slice().sort((a, b) => (a.kuupaev || "").localeCompare(b.kuupaev || ""));
+      const soon = tulevased();
       sel.innerHTML = soon.map((e, i) => {
         const id = yritusId(e, i);
         const nimi = (formaat(e.kuupaev) + " · " + (e.kellaaeg || "") + " · " + (e.koht || "")).trim();
@@ -1260,7 +1244,7 @@
       const pack = T[lang] || T.et || {};
       const opt = sel.selectedOptions[0];
       const euro = opt ? opt.getAttribute("data-euro") : "";
-      el.textContent = euro ? (pack.soov_euro || "Selle õhtu energiavahetus:") + " " + euro + " €" : "";
+      el.textContent = euro ? ((pack.soov_euro || "Selle õhtu energiavahetus:") + " " + euro + " €") : "";
     }
     function naitaSoovVorm() {
       document.getElementById("soel").classList.add("peidus");
@@ -1312,7 +1296,11 @@
       const f = e.target;
       const email = f.email.value.trim();
       const tel = f.telefon.value.trim();
-      if (!email || !tel) { alert(pack.soov_kohustus || "Email ja telefon on vaja."); return; }
+      const nimi = f.nimi.value.trim();
+      if (!nimi || !email || !tel) {
+        alert(pack.soov_kohustus || "Nimi, email ja telefon on vaja.");
+        return;
+      }
       const tulem = document.getElementById("soovTulem");
       const url = (seaded.soov_url || "").trim();
       if (!url) {
@@ -1324,14 +1312,10 @@
       const keha = new URLSearchParams({
         voti: seaded.soov_voti || "kahevahel-soov",
         hp: f.hp.value,
-        nimi: f.nimi.value.trim(),
-        yritus: f.yritus.value,
-        email, telefon: tel,
+        nimi, yritus: f.yritus.value, email, telefon: tel,
         uudiskiri: f.uudiskiri.checked ? "jah" : "ei"
       });
-      try {
-        await fetch(url, { method: "POST", body: keha, mode: "no-cors" });
-      } catch (err) {}
+      try { await fetch(url, { method: "POST", body: keha, mode: "no-cors" }); } catch (err) {}
       f.classList.add("peidus");
       tulem.textContent = pack.soov_teel || "Soov on teel.";
       tulem.classList.remove("peidus");
