@@ -1348,6 +1348,8 @@
     });
     document.getElementById("soovYritus").addEventListener("change", uuendaEuro);
     document.getElementById("soovVorm").addEventListener("submit", (e) => {
+      const keelVali = document.getElementById("soovKeel");
+      if (keelVali) keelVali.value = lang;
       const pack = T[lang] || T.et || {};
       const f = e.target;
       if (!f.nimi.value.trim() || !f.email.value.trim() || !f.telefon.value.trim()) {
