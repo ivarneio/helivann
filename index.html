@@ -423,13 +423,17 @@
       font:inherit; background:var(--dark); color:#f6eee2; border:0; border-radius:8px; cursor:pointer;
     }
     .soov-vorm .euro { color: var(--accent); margin:.35rem 0 .5rem; }
-        .soel-valikud { display:flex; flex-wrap:wrap; gap:.5rem; margin:.7rem 0 .35rem; }
+        .soel-kysi { margin: .15rem 0 .45rem; font-size: 1.05rem; color: var(--ink); }
+    .soel-valikud { display:flex; gap:.4rem; margin:.2rem 0 .45rem; }
     .soel-valikud label {
-      flex:1 1 3.6rem; min-height:3.1rem; display:flex; align-items:center; justify-content:center;
-      gap:.4rem; border:1px solid var(--line); border-radius:10px; background:#fff;
-      color:var(--ink); font-size:1.2rem; font-weight:600; cursor:pointer;
+      flex:1; min-width:0; height:2.15rem; display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--line); border-radius:8px; background:#fff;
+      color:var(--ink); font-size:1.15rem; font-weight:700; cursor:pointer;
     }
-    .soel-valikud input { width:1.15rem; height:1.15rem; margin:0; accent-color:#1a110d; }
+    .soel-valikud input { display:none; }
+    .soel-valikud label:has(input:checked) {
+      border-color: var(--accent); background: #f3e6d4;
+    }
     .peidus { display:none; }
     .empty { color: var(--muted); }
 
@@ -655,7 +659,7 @@
           <details class="inner" id="soov">
             <summary data-i="soov_silt">Osalen</summary>
             <div id="soel">
-              <p data-i="soov_soel">Et soov tuleks inimeselt. Mitu on kaks pluss üks?</p>
+              <p class="soel-kysi" data-i="soov_soel">2 + 1 = ?</p>
               <div class="soel-valikud" id="soelValikud">
                 <label><input type="radio" name="soelValik" value="2"> 2</label>
                 <label><input type="radio" name="soelValik" value="3"> 3</label>
@@ -1302,7 +1306,7 @@
       }
       soov.open = true;
       naitaSoovSoel();
-      setTimeout(() => soov.scrollIntoView({ behavior: "smooth", block: "start" }), 220);
+      setTimeout(() => document.getElementById("soel").scrollIntoView({ behavior: "smooth", block: "nearest" }), 220);
     }
     document.getElementById("soov").querySelector("summary").addEventListener("click", (e) => {
       e.preventDefault();
