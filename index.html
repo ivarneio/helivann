@@ -245,6 +245,20 @@
       text-align: left;
     }
     .sum-silt { line-height: 1.2; }
+    button.osalen {
+      flex-shrink: 0;
+      margin-left: auto;
+      margin-right: .35rem;
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--ink);
+      font-family: "Source Sans 3", sans-serif;
+      font-size: .92rem;
+      letter-spacing: .04em;
+      padding: .28rem .7rem;
+      border-radius: 999px;
+      cursor: pointer;
+    }
     #jargmine {
       font-family: "Source Sans 3", sans-serif;
       font-size: 1rem;
@@ -637,6 +651,7 @@
           <span class="sum-silt" data-i="jargmine">Järgmine rännak</span>
           <span id="jargmine">Laen listi…</span>
         </div>
+        <button type="button" class="osalen" id="osalenNupp" data-i="osalen">Osalen</button>
       </summary>
       <div class="acc-clip">
         <div class="body">
@@ -656,10 +671,9 @@
               <select name="yritus" id="soovYritus"></select>
               <p class="euro" id="soovEuro"></p>
               <label data-i="soov_email">Email</label>
-              <input name="email" type="email">
+              <input name="email" type="email" required autocomplete="email" inputmode="email">
               <label data-i="soov_telefon">Telefon</label>
-              <input name="telefon" type="tel">
-              <p data-i="soov_yks">Üks neist kahest piisab.</p>
+              <input name="telefon" type="tel" required autocomplete="tel" inputmode="tel">
               <label class="rida">
                 <input type="checkbox" name="uudiskiri" id="soovUudis">
                 <span data-i="soov_uudis">Tahan emailile teadet järgmistest rännakutest. Siis on email vaja.</span>
@@ -1273,6 +1287,11 @@
       e.preventDefault();
       avaSoov();
     });
+    document.getElementById("osalenNupp").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      avaSoov();
+    });
     document.getElementById("soelEdasi").addEventListener("click", () => {
       const pack = T[lang] || T.et || {};
       if (document.getElementById("soelVastus").value.trim() !== "3") {
@@ -1282,9 +1301,6 @@
       sessionStorage.setItem(SOOV_KEY, "jah");
       naitaSoovVorm();
     });
-    document.getElementById("soovUudis").addEventListener("change", (e) => {
-      document.getElementById("soovVorm").email.required = e.target.checked;
-    });
     document.getElementById("soovYritus").addEventListener("change", uuendaEuro);
     document.getElementById("soovVorm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1292,7 +1308,7 @@
       const f = e.target;
       const email = f.email.value.trim();
       const tel = f.telefon.value.trim();
-      if (!email && !tel) { alert(pack.soov_yks || "Email või telefon."); return; }
+      if (!email || !tel) { alert(pack.soov_kohustus || "Email ja telefon on vaja."); return; }
       const tulem = document.getElementById("soovTulem");
       const url = (seaded.soov_url || "").trim();
       if (!url) {
