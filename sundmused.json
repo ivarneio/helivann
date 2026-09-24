@@ -1,8 +1,10 @@
 [
   {
+    "id": "U001",
     "kuupaev": "2026-09-22",
     "kellaaeg": "21:00",
     "koht": "Kehra Rahvamaja",
+    "euro": 15,
     "markus": "",
     "tais": false
   }
