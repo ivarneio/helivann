@@ -416,11 +416,17 @@
     footer {
       background: var(--dark);
       color: #e8d8c6;
-      padding: 1.6rem 1.2rem 2rem;
+      padding: 1rem 1.2rem calc(1rem + env(safe-area-inset-bottom, 0px));
       text-align: center;
       font-size: .88rem;
     }
+    footer {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 35;
+    }
     footer a { color: #f6eee2; text-decoration: none; font-size: 1.05rem; }
+    span.tarn { color: #c0392b; font-weight: 700; font-size: .8em; }
     .soov-vorm label { display:block; margin:.65rem 0 .2rem; color: var(--muted); }
     .soov-vorm input, .soov-vorm select {
       width:100%; padding:.55rem .65rem; font:inherit;
@@ -651,13 +657,12 @@
           <span class="sum-silt" data-i="jargmine">Järgmine rännak</span>
           <span id="jargmine">Laen listi…</span>
         </div>
-        <button type="button" class="osalen" id="osalenNupp" data-i="osalen">Osalen</button>
       </summary>
       <div class="acc-clip">
         <div class="body">
           <ul class="list" id="list"></ul>
           <details class="inner" id="soov">
-            <summary data-i="soov_silt">Avalda soovi osaleda</summary>
+            <summary data-i="soov_silt">Osalen</summary>
             <div id="soel">
               <p data-i="soov_soel">Et soov tuleks inimeselt. Mitu on kaks pluss üks?</p>
               <input id="soelVastus" inputmode="numeric" autocomplete="off">
@@ -665,14 +670,14 @@
             </div>
             <form id="soovVorm" class="soov-vorm peidus">
               <input type="text" name="hp" tabindex="-1" autocomplete="off" class="peidus" aria-hidden="true">
-              <label data-i="soov_nimi">Nimi</label>
-              <input name="nimi" required>
+              <label data-i="soov_nimi">Nimi <span class="tarn">*</span></label>
+              <input name="nimi" required autocomplete="name">
               <label data-i="soov_yritus">Milline rännak</label>
               <select name="yritus" id="soovYritus"></select>
               <p class="euro" id="soovEuro"></p>
-              <label data-i="soov_email">Email</label>
+              <label data-i="soov_email">Email <span class="tarn">*</span></label>
               <input name="email" type="email" required autocomplete="email" inputmode="email">
-              <label data-i="soov_telefon">Telefon</label>
+              <label data-i="soov_telefon">Telefon <span class="tarn">*</span></label>
               <input name="telefon" type="tel" required autocomplete="tel" inputmode="tel">
               <label class="rida">
                 <input type="checkbox" name="uudiskiri" id="soovUudis">
@@ -812,7 +817,9 @@
       const pack = (T[lang] || T.et);
       const nextBox = document.getElementById("jargmine");
       const list = document.getElementById("list");
-      const soon = rowsCache.slice().sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
+      const tana = new Date();
+      const tanaStr = tana.getFullYear() + "-" + String(tana.getMonth()+1).padStart(2,"0") + "-" + String(tana.getDate()).padStart(2,"0");
+      const soon = rowsCache.filter(e => (e.kuupaev || "") >= tanaStr).slice().sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
       if (!soon.length) {
         nextBox.innerHTML = "<span class='empty'>" + pack.tyhi + "</span>";
         list.innerHTML = "";
@@ -1236,7 +1243,9 @@
       const sel = document.getElementById("soovYritus");
       if (!sel) return;
       const pack = T[lang] || T.et || {};
-      const soon = rowsCache.slice().sort((a, b) => (a.kuupaev || "").localeCompare(b.kuupaev || ""));
+      const tana = new Date();
+      const tanaStr = tana.getFullYear() + "-" + String(tana.getMonth()+1).padStart(2,"0") + "-" + String(tana.getDate()).padStart(2,"0");
+      const soon = rowsCache.filter(e => (e.kuupaev || "") >= tanaStr).slice().sort((a, b) => (a.kuupaev || "").localeCompare(b.kuupaev || ""));
       sel.innerHTML = soon.map((e, i) => {
         const id = yritusId(e, i);
         const nimi = (formaat(e.kuupaev) + " · " + (e.kellaaeg || "") + " · " + (e.koht || "")).trim();
@@ -1285,11 +1294,6 @@
     });
     document.getElementById("jalgSoov").addEventListener("click", (e) => {
       e.preventDefault();
-      avaSoov();
-    });
-    document.getElementById("osalenNupp").addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
       avaSoov();
     });
     document.getElementById("soelEdasi").addEventListener("click", () => {
