@@ -185,6 +185,10 @@
       padding: 2.4rem 0 70vh;
       font-size: 1rem;
     }
+    @media (min-width: 821px) {
+      .wrap { width: min(52rem, calc(100% - 3rem)); }
+      .raamat-lava { width: min(50rem, 86vw); }
+    }
     h2 {
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 1.55rem;
@@ -402,6 +406,20 @@
       text-align: center;
       font-size: .88rem;
     }
+    footer a { color: #f6eee2; text-decoration: none; font-size: 1.05rem; }
+    .soov-vorm label { display:block; margin:.65rem 0 .2rem; color: var(--muted); }
+    .soov-vorm input, .soov-vorm select {
+      width:100%; padding:.55rem .65rem; font:inherit;
+      border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink);
+    }
+    .soov-vorm .rida { display:flex; gap:.55rem; align-items:flex-start; margin:.75rem 0; }
+    .soov-vorm .rida input { width:auto; }
+    #soel .saada, .soov-vorm .saada {
+      display:block; width:100%; margin-top:.85rem; padding:.7rem .8rem;
+      font:inherit; background:var(--dark); color:#f6eee2; border:0; border-radius:8px; cursor:pointer;
+    }
+    .soov-vorm .euro { color: var(--accent); margin:.35rem 0 .5rem; }
+    .peidus { display:none; }
     .empty { color: var(--muted); }
 
     .raamat {
@@ -623,6 +641,33 @@
       <div class="acc-clip">
         <div class="body">
           <ul class="list" id="list"></ul>
+          <details class="inner" id="soov">
+            <summary data-i="soov_silt">Avalda soovi osaleda</summary>
+            <div id="soel">
+              <p data-i="soov_soel">Et soov tuleks inimeselt. Mitu on kaks pluss üks?</p>
+              <input id="soelVastus" inputmode="numeric" autocomplete="off">
+              <button type="button" class="saada" id="soelEdasi" data-i="soel_edasi">Edasi</button>
+            </div>
+            <form id="soovVorm" class="soov-vorm peidus">
+              <input type="text" name="hp" tabindex="-1" autocomplete="off" class="peidus" aria-hidden="true">
+              <label data-i="soov_nimi">Nimi</label>
+              <input name="nimi" required>
+              <label data-i="soov_yritus">Milline rännak</label>
+              <select name="yritus" id="soovYritus"></select>
+              <p class="euro" id="soovEuro"></p>
+              <label data-i="soov_email">Email</label>
+              <input name="email" type="email">
+              <label data-i="soov_telefon">Telefon</label>
+              <input name="telefon" type="tel">
+              <p data-i="soov_yks">Üks neist kahest piisab.</p>
+              <label class="rida">
+                <input type="checkbox" name="uudiskiri" id="soovUudis">
+                <span data-i="soov_uudis">Tahan emailile teadet järgmistest rännakutest. Siis on email vaja.</span>
+              </label>
+              <button type="submit" class="saada" data-i="soov_saada">Saada soov</button>
+            </form>
+            <p id="soovTulem" class="peidus" style="color:#3d5a3d"></p>
+          </details>
         </div>
       </div>
     </details>
@@ -697,7 +742,7 @@
     </div>
   </div>
 
-  <footer data-i="jalus">Helivann · Kehra</footer>
+  <footer><a href="#soov" id="jalgSoov" data-i="osalemissoov">Osalemissoov</a></footer>
 
   <script>
     let T = {};
@@ -747,6 +792,7 @@
         kast.innerHTML = html;
       }
       renderList();
+      taidaSoovValik();
     }
     function renderList() {
       const pack = (T[lang] || T.et);
@@ -1166,6 +1212,110 @@
       window.avaRaamat = ava;
       window.sulgeRaamat = sulge;
     }
+
+
+    const SOOV_KEY = "soovInimene";
+    function yritusId(e, i) {
+      return e.id || ("U" + String(i + 1).padStart(3, "0"));
+    }
+    function taidaSoovValik() {
+      const sel = document.getElementById("soovYritus");
+      if (!sel) return;
+      const pack = T[lang] || T.et || {};
+      const soon = rowsCache.slice().sort((a, b) => (a.kuupaev || "").localeCompare(b.kuupaev || ""));
+      sel.innerHTML = soon.map((e, i) => {
+        const id = yritusId(e, i);
+        const nimi = (formaat(e.kuupaev) + " · " + (e.kellaaeg || "") + " · " + (e.koht || "")).trim();
+        return "<option value='" + id + "' data-euro='" + (e.euro || "") + "'>" + nimi + "</option>";
+      }).join("");
+      uuendaEuro();
+    }
+    function uuendaEuro() {
+      const sel = document.getElementById("soovYritus");
+      const el = document.getElementById("soovEuro");
+      if (!sel || !el) return;
+      const pack = T[lang] || T.et || {};
+      const opt = sel.selectedOptions[0];
+      const euro = opt ? opt.getAttribute("data-euro") : "";
+      el.textContent = euro ? (pack.soov_euro || "Selle õhtu energiavahetus:") + " " + euro + " €" : "";
+    }
+    function naitaSoovVorm() {
+      document.getElementById("soel").classList.add("peidus");
+      document.getElementById("soovVorm").classList.remove("peidus");
+    }
+    function naitaSoovSoel() {
+      if (sessionStorage.getItem(SOOV_KEY) === "jah") naitaSoovVorm();
+      else {
+        document.getElementById("soel").classList.remove("peidus");
+        document.getElementById("soovVorm").classList.add("peidus");
+      }
+    }
+    function avaSoov() {
+      const tulekul = document.getElementById("tulekul");
+      const soov = document.getElementById("soov");
+      document.getElementById("soovTulem").classList.add("peidus");
+      if (tulekul && !tulekul.classList.contains("avatud")) {
+        tulekul.open = true;
+        requestAnimationFrame(() => tulekul.classList.add("avatud"));
+      }
+      soov.open = true;
+      naitaSoovSoel();
+      setTimeout(() => soov.scrollIntoView({ behavior: "smooth", block: "start" }), 220);
+    }
+    document.getElementById("soov").querySelector("summary").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const soov = document.getElementById("soov");
+      if (soov.open) { soov.open = false; return; }
+      avaSoov();
+    });
+    document.getElementById("jalgSoov").addEventListener("click", (e) => {
+      e.preventDefault();
+      avaSoov();
+    });
+    document.getElementById("soelEdasi").addEventListener("click", () => {
+      const pack = T[lang] || T.et || {};
+      if (document.getElementById("soelVastus").value.trim() !== "3") {
+        alert(pack.soel_vale || "Proovi veel.");
+        return;
+      }
+      sessionStorage.setItem(SOOV_KEY, "jah");
+      naitaSoovVorm();
+    });
+    document.getElementById("soovUudis").addEventListener("change", (e) => {
+      document.getElementById("soovVorm").email.required = e.target.checked;
+    });
+    document.getElementById("soovYritus").addEventListener("change", uuendaEuro);
+    document.getElementById("soovVorm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const pack = T[lang] || T.et || {};
+      const f = e.target;
+      const email = f.email.value.trim();
+      const tel = f.telefon.value.trim();
+      if (!email && !tel) { alert(pack.soov_yks || "Email või telefon."); return; }
+      const tulem = document.getElementById("soovTulem");
+      const url = (seaded.soov_url || "").trim();
+      if (!url) {
+        f.classList.add("peidus");
+        tulem.textContent = pack.soov_teel || "Soov on teel.";
+        tulem.classList.remove("peidus");
+        return;
+      }
+      const keha = new URLSearchParams({
+        voti: seaded.soov_voti || "kahevahel-soov",
+        hp: f.hp.value,
+        nimi: f.nimi.value.trim(),
+        yritus: f.yritus.value,
+        email, telefon: tel,
+        uudiskiri: f.uudiskiri.checked ? "jah" : "ei"
+      });
+      try {
+        await fetch(url, { method: "POST", body: keha, mode: "no-cors" });
+      } catch (err) {}
+      f.classList.add("peidus");
+      tulem.textContent = pack.soov_teel || "Soov on teel.";
+      tulem.classList.remove("peidus");
+    });
 
     Promise.all([
       fetch("tekstid.json", { cache: "no-store" }).then(r => r.json()),
