@@ -1,179 +1,174 @@
-	
-et	
-eyebrow	"trumm · parmupill · didgeridoo · helikausid"
-lead	"Heli, mida kuuled kehaga."
-nav_tulekul	"Tulekul"
-nav_mis	"Helirännak"
-nav_kuidas	"Huvitav teada"
-nav_pildid	"Pildid"
-nav_kontakt	"Kontakt"
-jargmine	"Järgmine rännak"
-tulekul	"Tulekul"
-laen	"Laen listi…"
-tyhi	"Uus kuupäev tuleb varsti."
-tais	"täis"
-viga	"Listi ei saanud laadida."
-mis	"Madalsageduslik somaatilis-vibroakustiline helirännak"
-pikemalt	"Pikemalt"
-kuidas	"Huvitav teada"
-muud	"Privaatrännak"
-pildid	"Galerii"
-pildid_mark	"FOTOD"
-kontakt	"Kontakt"
-kontakt_kes	"Ivar Neio kahevahel@neio.ee"
-telefon	"Telefon"
-kontakt_kord	"Koht kinnitatakse sõnumiga kas emaili või SMS'ga. "
-jalus	"Helirännak- Trumm, Parmupill, Didgeridoo, Laulvad kristallkausid"
-raamat_tagasi	"Tagasi"
-raamat_edasi	"Edasi"
-nav_muud	"Privaatrännak"
-osalemissoov	"Osalemissoov"
-soov_silt	"Osalen"
-soov_soel	"Et soov tuleks inimeselt. Mitu on kaks pluss üks?"
-soel_edasi	"Edasi"
-soel_vale	"Proovi veel."
-soov_nimi	"Nimi"
-soov_yritus	"Milline rännak"
-soov_email	"Email"
-soov_telefon	"Telefon"
-soov_yks	"Üks neist kahest piisab."
-soov_uudis	"Tahan emailile teadet järgmistest rännakutest."
-soov_saada	"Saada soov"
-soov_teel	"Soov on teel. Kui email on kirjas, saad sealt kviitungi."
-soov_euro	"Selle õhtu energiavahetus:"
-osalen	"Osalen"
-soov_kohustus	"Email ja telefon on vaja."
-en	
-eyebrow	"drum · jew's harp · didgeridoo · singing bowls"
-lead	"Sound you hear with the body."
-nav_tulekul	"Coming up"
-nav_mis	"Sound journey"
-nav_kuidas	"Interesting to know"
-nav_pildid	"Photos"
-nav_kontakt	"Contact"
-jargmine	"Next journey"
-tulekul	"Coming up"
-laen	"Loading the list…"
-tyhi	"A new date will come soon."
-tais	"full"
-viga	"Could not load the list."
-mis	"Low-frequency somatic-vibroacoustic sound journey"
-pikemalt	"Longer"
-kuidas	"Interesting to know"
-muud	"Private journey"
-pildid	"Gallery"
-pildid_mark	"PHOTOS"
-kontakt	"Contact"
-kontakt_kes	"Ivar Neio kahevahel@neio.ee"
-telefon	"Phone"
-kontakt_kord	"The place is confirmed by a message, by email or SMS."
-jalus	"Sound journey — Drum, Jew's harp, Didgeridoo, Singing crystal bowls"
-raamat_tagasi	"Back"
-raamat_edasi	"Next"
-nav_muud	"Private journey"
-osalemissoov	"Request a place"
-soov_silt	"Join"
-soov_soel	"So the request comes from a person. What is two plus one?"
-soel_edasi	"Continue"
-soel_vale	"Try again."
-soov_nimi	"Name"
-soov_yritus	"Which journey"
-soov_email	"Email"
-soov_telefon	"Phone"
-soov_yks	"One of the two is enough."
-soov_uudis	"I want email about later journeys."
-soov_saada	"Send request"
-soov_teel	"The request is on its way. If you left an email, a note will come there."
-soov_euro	"Energy exchange for this evening:"
-osalen	"I will join"
-soov_kohustus	"Email and phone are needed."
-ru	
-eyebrow	"барабан · варган · диджериду · поющие чаши"
-lead	"Звук, который слышишь телом."
-nav_tulekul	"Скоро"
-nav_mis	"Звуковое путешествие"
-nav_kuidas	"Интересно знать"
-nav_pildid	"Фото"
-nav_kontakt	"Контакт"
-jargmine	"Следующее путешествие"
-tulekul	"Скоро"
-laen	"Загружаю список…"
-tyhi	"Новая дата появится скоро."
-tais	"мест нет"
-viga	"Список не удалось загрузить."
-mis	"Низкочастотное соматическо-виброакустическое звуковое путешествие"
-pikemalt	"Подробнее"
-kuidas	"Интересно знать"
-muud	"Частное путешествие"
-pildid	"Галерея"
-pildid_mark	"ФОТО"
-kontakt	"Контакт"
-kontakt_kes	"Ivar Neio kahevahel@neio.ee"
-telefon	"Телефон"
-kontakt_kord	"Место подтверждаем сообщением — письмом или SMS."
-jalus	"Звуковое путешествие — барабан, варган, диджериду, поющие кристаллические чаши"
-raamat_tagasi	"Назад"
-raamat_edasi	"Дальше"
-nav_muud	"Частное путешествие"
-osalemissoov	"Заявка"
-soov_silt	"Участвую"
-soov_soel	"Чтобы заявка была от человека. Сколько будет два плюс один?"
-soel_edasi	"Дальше"
-soel_vale	"Попробуй ещё."
-soov_nimi	"Имя"
-soov_yritus	"Какое путешествие"
-soov_email	"Эл. почта"
-soov_telefon	"Телефон"
-soov_yks	"Достаточно одного из двух."
-soov_uudis	"Хочу письма о следующих вечерах."
-soov_saada	"Отправить"
-soov_teel	"Заявка ушла. Если есть почта, туда придёт отметка."
-soov_euro	"Энергообмен этого вечера:"
-osalen	"Участвую"
-soov_kohustus	"Нужны и почта, и телефон."
-tr	
-eyebrow	"davul · ağız kopuzu · didgeridoo · öten kaseler"
-lead	"Bedenle duyduğun ses."
-nav_tulekul	"Yakında"
-nav_mis	"Ses yolculuğu"
-nav_kuidas	"İlginç bilgiler"
-nav_pildid	"Fotoğraflar"
-nav_kontakt	"İletişim"
-jargmine	"Sonraki yolculuk"
-tulekul	"Yakında"
-laen	"Liste yükleniyor…"
-tyhi	"Yeni tarih yakında gelecek."
-tais	"dolu"
-viga	"Liste yüklenemedi."
-mis	"Düşük frekanslı somatik-vibroakustik ses yolculuğu"
-pikemalt	"Daha uzun"
-kuidas	"İlginç bilgiler"
-muud	"Özel yolculuk"
-pildid	"Galeri"
-pildid_mark	"FOTOĞRAFLAR"
-kontakt	"İletişim"
-kontakt_kes	"Ivar Neio kahevahel@neio.ee"
-telefon	"Telefon"
-kontakt_kord	"Yer mesajla onaylanır — e-posta veya SMS."
-jalus	"Ses yolculuğu — davul, ağız kopuzu, didgeridoo, öten kristal kaseler"
-raamat_tagasi	"Geri"
-raamat_edasi	"İleri"
-nav_muud	"Özel yolculuk"
-osalemissoov	"Katılım isteği"
-soov_silt	"Katıl"
-soov_soel	"İsteğin insandan geldiğini görmek için. İki artı bir kaç eder?"
-soel_edasi	"İleri"
-soel_vale	"Bir daha dene."
-soov_nimi	"Ad"
-soov_yritus	"Hangi yolculuk"
-soov_email	"E-posta"
-soov_telefon	"Telefon"
-soov_yks	"İkisinden biri yeter."
-soov_uudis	"Sonraki yolculuklar için e-posta istiyorum."
-soov_saada	"Gönder"
-soov_teel	"İstek yolda. E-posta yazdıysan oraya bir not gelir."
-soov_euro	"Bu akşamın enerji değişimi:"
-osalen	"Katılıyorum"
-soov_kohustus	"E-posta ve telefon gerekli."
-et
-nav_pildid
+{
+  "et": {
+    "eyebrow": "trumm · parmupill · didgeridoo · helikausid",
+    "lead": "Heli, mida kuuled kehaga.",
+    "nav_tulekul": "Tulekul",
+    "nav_mis": "Helirännak",
+    "nav_kuidas": "Huvitav teada",
+    "nav_pildid": "Pildid",
+    "nav_kontakt": "Kontakt",
+    "jargmine": "Järgmine rännak",
+    "tulekul": "Tulekul",
+    "laen": "Laen listi…",
+    "tyhi": "Uus kuupäev tuleb varsti.",
+    "tais": "täis",
+    "viga": "Listi ei saanud laadida.",
+    "mis": "Madalsageduslik somaatilis-vibroakustiline helirännak",
+    "pikemalt": "Pikemalt",
+    "kuidas": "Huvitav teada",
+    "muud": "Privaatrännak",
+    "pildid": "Galerii",
+    "pildid_mark": "FOTOD",
+    "kontakt": "Kontakt",
+    "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
+    "telefon": "Telefon",
+    "kontakt_kord": "Koht kinnitatakse sõnumiga kas emaili või SMS'ga. ",
+    "jalus": "Helirännak- Trumm, Parmupill, Didgeridoo, Laulvad kristallkausid",
+    "raamat_tagasi": "Tagasi",
+    "raamat_edasi": "Edasi",
+    "nav_muud": "Privaatrännak",
+    "osalemissoov": "Osalemissoov",
+    "soov_silt": "Osalen",
+    "soov_soel": "Et soov tuleks inimeselt. Mitu on kaks pluss üks?",
+    "soel_edasi": "Edasi",
+    "soel_vale": "Proovi veel.",
+    "soov_nimi": "Nimi",
+    "soov_yritus": "Milline rännak",
+    "soov_email": "Email",
+    "soov_telefon": "Telefon",
+    "soov_uudis": "Tahan emailile teadet järgmistest rännakutest.",
+    "soov_saada": "Saada soov",
+    "soov_teel": "Soov on teel. Kui email on kirjas, saad sealt kviitungi.",
+    "soov_euro": "Selle õhtu energiavahetus:",
+    "soov_kohustus": "Nimi, email ja telefon on vaja."
+  },
+  "en": {
+    "eyebrow": "drum · jew's harp · didgeridoo · singing bowls",
+    "lead": "Sound you hear with the body.",
+    "nav_tulekul": "Coming up",
+    "nav_mis": "Sound journey",
+    "nav_kuidas": "Interesting to know",
+    "nav_pildid": "Photos",
+    "nav_kontakt": "Contact",
+    "jargmine": "Next journey",
+    "tulekul": "Coming up",
+    "laen": "Loading the list…",
+    "tyhi": "A new date will come soon.",
+    "tais": "full",
+    "viga": "Could not load the list.",
+    "mis": "Low-frequency somatic-vibroacoustic sound journey",
+    "pikemalt": "Longer",
+    "kuidas": "Interesting to know",
+    "muud": "Private journey",
+    "pildid": "Gallery",
+    "pildid_mark": "PHOTOS",
+    "kontakt": "Contact",
+    "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
+    "telefon": "Phone",
+    "kontakt_kord": "The place is confirmed by a message, by email or SMS.",
+    "jalus": "Sound journey — Drum, Jew's harp, Didgeridoo, Singing crystal bowls",
+    "raamat_tagasi": "Back",
+    "raamat_edasi": "Next",
+    "nav_muud": "Private journey",
+    "osalemissoov": "Request a place",
+    "soov_silt": "Join",
+    "soov_soel": "So the request comes from a person. What is two plus one?",
+    "soel_edasi": "Continue",
+    "soel_vale": "Try again.",
+    "soov_nimi": "Name",
+    "soov_yritus": "Which journey",
+    "soov_email": "Email",
+    "soov_telefon": "Phone",
+    "soov_uudis": "I want email about later journeys.",
+    "soov_saada": "Send request",
+    "soov_teel": "The request is on its way. If you left an email, a note will come there.",
+    "soov_euro": "Energy exchange for this evening:",
+    "soov_kohustus": "Name, email and phone are needed."
+  },
+  "ru": {
+    "eyebrow": "барабан · варган · диджериду · поющие чаши",
+    "lead": "Звук, который слышишь телом.",
+    "nav_tulekul": "Скоро",
+    "nav_mis": "Звуковое путешествие",
+    "nav_kuidas": "Интересно знать",
+    "nav_pildid": "Фото",
+    "nav_kontakt": "Контакт",
+    "jargmine": "Следующее путешествие",
+    "tulekul": "Скоро",
+    "laen": "Загружаю список…",
+    "tyhi": "Новая дата появится скоро.",
+    "tais": "мест нет",
+    "viga": "Список не удалось загрузить.",
+    "mis": "Низкочастотное соматическо-виброакустическое звуковое путешествие",
+    "pikemalt": "Подробнее",
+    "kuidas": "Интересно знать",
+    "muud": "Частное путешествие",
+    "pildid": "Галерея",
+    "pildid_mark": "ФОТО",
+    "kontakt": "Контакт",
+    "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
+    "telefon": "Телефон",
+    "kontakt_kord": "Место подтверждаем сообщением — письмом или SMS.",
+    "jalus": "Звуковое путешествие — барабан, варган, диджериду, поющие кристаллические чаши",
+    "raamat_tagasi": "Назад",
+    "raamat_edasi": "Дальше",
+    "nav_muud": "Частное путешествие",
+    "osalemissoov": "Заявка",
+    "soov_silt": "Участвую",
+    "soov_soel": "Чтобы заявка была от человека. Сколько будет два плюс один?",
+    "soel_edasi": "Дальше",
+    "soel_vale": "Попробуй ещё.",
+    "soov_nimi": "Имя",
+    "soov_yritus": "Какое путешествие",
+    "soov_email": "Эл. почта",
+    "soov_telefon": "Телефон",
+    "soov_uudis": "Хочу письма о следующих вечерах.",
+    "soov_saada": "Отправить",
+    "soov_teel": "Заявка ушла. Если есть почта, туда придёт отметка.",
+    "soov_euro": "Энергообмен этого вечера:",
+    "soov_kohustus": "Нужны имя, почта и телефон."
+  },
+  "tr": {
+    "eyebrow": "davul · ağız kopuzu · didgeridoo · öten kaseler",
+    "lead": "Bedenle duyduğun ses.",
+    "nav_tulekul": "Yakında",
+    "nav_mis": "Ses yolculuğu",
+    "nav_kuidas": "İlginç bilgiler",
+    "nav_pildid": "Fotoğraflar",
+    "nav_kontakt": "İletişim",
+    "jargmine": "Sonraki yolculuk",
+    "tulekul": "Yakında",
+    "laen": "Liste yükleniyor…",
+    "tyhi": "Yeni tarih yakında gelecek.",
+    "tais": "dolu",
+    "viga": "Liste yüklenemedi.",
+    "mis": "Düşük frekanslı somatik-vibroakustik ses yolculuğu",
+    "pikemalt": "Daha uzun",
+    "kuidas": "İlginç bilgiler",
+    "muud": "Özel yolculuk",
+    "pildid": "Galeri",
+    "pildid_mark": "FOTOĞRAFLAR",
+    "kontakt": "İletişim",
+    "kontakt_kes": "Ivar Neio kahevahel@neio.ee",
+    "telefon": "Telefon",
+    "kontakt_kord": "Yer mesajla onaylanır — e-posta veya SMS.",
+    "jalus": "Ses yolculuğu — davul, ağız kopuzu, didgeridoo, öten kristal kaseler",
+    "raamat_tagasi": "Geri",
+    "raamat_edasi": "İleri",
+    "nav_muud": "Özel yolculuk",
+    "osalemissoov": "Katılım isteği",
+    "soov_silt": "Katıl",
+    "soov_soel": "İsteğin insandan geldiğini görmek için. İki artı bir kaç eder?",
+    "soel_edasi": "İleri",
+    "soel_vale": "Bir daha dene.",
+    "soov_nimi": "Ad",
+    "soov_yritus": "Hangi yolculuk",
+    "soov_email": "E-posta",
+    "soov_telefon": "Telefon",
+    "soov_uudis": "Sonraki yolculuklar için e-posta istiyorum.",
+    "soov_saada": "Gönder",
+    "soov_teel": "İstek yolda. E-posta yazdıysan oraya bir not gelir.",
+    "soov_euro": "Bu akşamın enerji değişimi:",
+    "soov_kohustus": "Ad, e-posta ve telefon gerekli."
+  }
+}
