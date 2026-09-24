@@ -423,6 +423,13 @@
       font:inherit; background:var(--dark); color:#f6eee2; border:0; border-radius:8px; cursor:pointer;
     }
     .soov-vorm .euro { color: var(--accent); margin:.35rem 0 .5rem; }
+        .soel-valikud { display:flex; flex-wrap:wrap; gap:.5rem; margin:.7rem 0 .35rem; }
+    .soel-valikud label {
+      flex:1 1 3.6rem; min-height:3.1rem; display:flex; align-items:center; justify-content:center;
+      gap:.4rem; border:1px solid var(--line); border-radius:10px; background:#fff;
+      color:var(--ink); font-size:1.2rem; font-weight:600; cursor:pointer;
+    }
+    .soel-valikud input { width:1.15rem; height:1.15rem; margin:0; accent-color:#1a110d; }
     .peidus { display:none; }
     .empty { color: var(--muted); }
 
@@ -649,11 +656,18 @@
             <summary data-i="soov_silt">Osalen</summary>
             <div id="soel">
               <p data-i="soov_soel">Et soov tuleks inimeselt. Mitu on kaks pluss üks?</p>
-              <input id="soelVastus" inputmode="numeric" autocomplete="off">
+              <div class="soel-valikud" id="soelValikud">
+                <label><input type="radio" name="soelValik" value="2"> 2</label>
+                <label><input type="radio" name="soelValik" value="3"> 3</label>
+                <label><input type="radio" name="soelValik" value="4"> 4</label>
+                <label><input type="radio" name="soelValik" value="5"> 5</label>
+                <label><input type="radio" name="soelValik" value="6"> 6</label>
+              </div>
               <button type="button" class="saada" id="soelEdasi" data-i="soel_edasi">Edasi</button>
             </div>
-            <form id="soovVorm" class="soov-vorm peidus" method="post">
+            <form id="soovVorm" class="soov-vorm peidus" method="post" autocomplete="off">
               <input type="hidden" name="voti" id="soovVoti" value="">
+              <input type="hidden" name="tagasi" id="soovTagasi" value="">
               <input type="text" name="hp" tabindex="-1" autocomplete="off" class="peidus" aria-hidden="true">
               <label><span data-i="soov_nimi">Nimi</span> <span class="tarn">*</span></label>
               <input name="nimi" required autocomplete="name">
@@ -1220,7 +1234,20 @@
     }
 
 
-    const SOOV_KEY = "soovInimene";
+    let soelOk = false;
+    (function puhastaPärastSaatmist() {
+      const q = new URLSearchParams(location.search);
+      if (q.get("saadetud") !== "1") return;
+      const vorm = document.getElementById("soovVorm");
+      if (vorm) vorm.reset();
+      soelOk = false;
+      const tulem = document.getElementById("soovTulem");
+      if (tulem) {
+        tulem.textContent = "Sõnum on saadetud. Kinnituse email saabub peatselt.";
+        tulem.classList.remove("peidus");
+      }
+      history.replaceState({}, "", location.pathname + (location.hash || ""));
+    })();
     function yritusId(e, i) { return e.id || ("U" + String(i + 1).padStart(3, "0")); }
     function tulevased() {
       const tana = new Date();
@@ -1241,6 +1268,8 @@
       if (vorm && seaded.soov_url) vorm.action = seaded.soov_url;
       const voti = document.getElementById("soovVoti");
       if (voti) voti.value = seaded.soov_voti || "kahevahel-soov";
+      const tagasi = document.getElementById("soovTagasi");
+      if (tagasi) tagasi.value = location.origin + location.pathname;
     }
     function uuendaEuro() {
       const sel = document.getElementById("soovYritus");
@@ -1256,10 +1285,11 @@
       document.getElementById("soovVorm").classList.remove("peidus");
     }
     function naitaSoovSoel() {
-      if (sessionStorage.getItem(SOOV_KEY) === "jah") naitaSoovVorm();
+      if (soelOk) naitaSoovVorm();
       else {
         document.getElementById("soel").classList.remove("peidus");
         document.getElementById("soovVorm").classList.add("peidus");
+        document.getElementById("soovTulem").classList.add("peidus");
       }
     }
     function avaSoov() {
@@ -1281,17 +1311,32 @@
       if (soov.open) { soov.open = false; return; }
       avaSoov();
     });
-    document.getElementById("jalgSoov").addEventListener("click", (e) => {
+    (function () {
+      const q = new URLSearchParams(location.search);
+      if (q.get("saadetud") === "1") {
+        const tulem = document.getElementById("soovTulem");
+        const vorm = document.getElementById("soovVorm");
+        if (vorm) vorm.reset();
+        sessionStorage.removeItem("soovInimene");
+        if (tulem) {
+          tulem.textContent = (T[lang] || T.et || {}).soov_teel || "Sõnum on saadetud. Kinnituse email saabub peatselt.";
+          tulem.classList.remove("peidus");
+        }
+        history.replaceState({}, "", location.pathname + location.hash);
+      }
+    })();
+        document.getElementById("jalgSoov").addEventListener("click", (e) => {
       e.preventDefault();
       avaSoov();
     });
     document.getElementById("soelEdasi").addEventListener("click", () => {
       const pack = T[lang] || T.et || {};
-      if (document.getElementById("soelVastus").value.trim() !== "3") {
+      const val = document.querySelector("input[name=soelValik]:checked");
+      if (!val || val.value !== "3") {
         alert(pack.soel_vale || "Proovi veel.");
         return;
       }
-      sessionStorage.setItem(SOOV_KEY, "jah");
+      soelOk = true;
       naitaSoovVorm();
     });
     document.getElementById("soovYritus").addEventListener("change", uuendaEuro);
