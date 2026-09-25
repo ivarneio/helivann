@@ -4,12 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kahe Vahel — helirännak</title>
-  <meta name="description" content="Madalsageduslik helirännak. Heli on kuulda ja kehas tunda. Parmupill, didgeridoo, kristallkausid. Kehra.">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch.png">
+  <meta name="description" content="Madalsageduslik helirännak. Heli, mida kuuled kehaga. Parmupill, didgeridoo, kristallkausid. Kehra.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kahe Vahel — helirännak">
-  <meta property="og:description" content="Heli on kuulda ja kehas tunda. Parmupill, didgeridoo, kristallkausid.">
-  <meta property="og:url" content="https://ivarneio.github.io/helivann/">
-  <meta property="og:image" content="https://ivarneio.github.io/helivann/og.jpg">
+  <meta property="og:description" content="Heli, mida kuuled kehaga. Parmupill, didgeridoo, kristallkausid.">
+  <meta property="og:url" content="https://ivar.neio.ee/soundbath/">
+  <meta property="og:image" content="https://ivar.neio.ee/soundbath/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -60,8 +63,10 @@
       justify-content: flex-end;
     }
     .hero-inner {
-      width: min(42rem, calc(100% - 2.2rem));
+      width: 100%;
+      max-width: none;
       margin: 0 auto;
+      text-align: center;
     }
     .hero-top {
       width: 100%;
@@ -109,22 +114,35 @@
       cursor: pointer; font: inherit; letter-spacing: .12em;
     }
     .langs button.on { opacity: 1; }
-    .hero-inner { padding-bottom: 2.6rem; }
+    .hero-inner { padding-bottom: clamp(11rem, 30vh, 17rem); }
+    .hero-nimi h1, .hero .lead, .hero .eyebrow {
+      text-shadow: 0 2px 18px rgba(18,10,6,.7);
+    }
+    @media (max-width: 820px) {
+      .hero-inner { padding-bottom: clamp(8rem, 24vh, 13rem); }
+    }
     .eyebrow {
       font-size: .7rem;
       letter-spacing: .2em;
       text-transform: uppercase;
       opacity: .78;
       margin: 0 0 .7rem;
+      text-align: center;
+      width: 100%;
+    }
+    .hero-nimi {
+      display: block;
+      text-align: center;
+      width: 100%;
     }
     .hero h1 {
       font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(2.4rem, 6vw + 1rem, 4.6rem);
+      font-size: clamp(3.1rem, 8vw + 1.2rem, 5.8rem);
       font-weight: 500;
       line-height: 1.05;
       margin: 0 0 .55rem;
     }
-    .hero .lead { margin: 0 0 1.3rem; font-size: 1.05rem; max-width: 22rem; opacity: .92; }
+    .hero .lead { margin: 0 0 1.3rem; font-size: 1.05rem; max-width: none; opacity: .92; text-align: center; }
     nav.toc {
       display: flex;
       flex-wrap: wrap;
@@ -144,7 +162,13 @@
       cursor: pointer;
       padding: .2rem .35rem;
     }
+    #tulekul, #mis, #kuidas, #muud, #pildid, #kontakt {
+      scroll-margin-top: 5.4rem;
+    }
     @media (max-width: 820px) {
+      .hero {
+        background-image: linear-gradient(180deg, rgba(18,10,6,.18) 0%, rgba(18,10,6,.28) 40%, rgba(18,10,6,.9) 100%), url("hero-mobiil.jpg");
+      }
       .menu-nupp { display: block; }
       nav.toc {
         display: none;
@@ -163,14 +187,18 @@
         padding: .55rem 0;
       }
       #tulekul, #mis, #kuidas, #muud, #pildid, #kontakt {
-        scroll-margin-top: 4.75rem;
+        scroll-margin-top: 5.4rem;
       }
     }
     .wrap {
       width: min(40rem, calc(100% - 2.4rem));
       margin: 0 auto;
-      padding: 2.4rem 0 3.2rem;
+      padding: 2.4rem 0 70vh;
       font-size: 1rem;
+    }
+    @media (min-width: 821px) {
+      .wrap { width: min(52rem, calc(100% - 3rem)); }
+      .raamat-lava { width: min(50rem, 86vw); }
     }
     h2 {
       font-family: "Cormorant Garamond", Georgia, serif;
@@ -274,13 +302,12 @@
       cursor: pointer;
     }
     .gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .55rem;
+      display: block;
+      max-width: 28rem;
     }
     .gallery img {
       width: 100%;
-      height: 10rem;
+      height: 14rem;
       object-fit: cover;
       border-radius: 8px;
       display: block;
@@ -288,7 +315,9 @@
     }
     .vaade {
       position: fixed;
-      inset: 0;
+      top: 0; right: 0; bottom: 0; left: 0;
+      height: 100%;
+      height: 100dvh;
       z-index: 80;
       background: rgba(14, 9, 6, .94);
       display: none;
@@ -296,6 +325,8 @@
       align-items: center;
       justify-content: center;
       padding: .6rem .6rem 0;
+      padding-top: max(.6rem, env(safe-area-inset-top, 0px));
+      padding-bottom: max(.6rem, env(safe-area-inset-bottom, 0px));
     }
     .vaade.sees { display: flex; }
     .vaade-suur {
@@ -316,16 +347,36 @@
     }
     .vaade-suur img.nahtav { opacity: 1; }
     .vaade-sulge {
-      position: absolute;
-      top: .7rem;
-      right: .9rem;
-      background: none;
-      border: 0;
+      position: fixed;
+      top: max(.55rem, env(safe-area-inset-top, 0px));
+      right: max(.55rem, env(safe-area-inset-right, 0px));
+      z-index: 90;
+      background: rgba(26,17,13,.72);
+      border: 1px solid rgba(246,238,226,.35);
       color: #f6eee2;
-      font-size: 1.8rem;
+      font-size: 1.15rem;
       line-height: 1;
       cursor: pointer;
-      opacity: .75;
+      min-width: 2.7rem;
+      min-height: 2.7rem;
+      border-radius: 999px;
+      padding: .35rem .7rem;
+    }
+    .vaade-sulge .sona { display: none; margin-left: .25rem; font-size: .92rem; }
+    @media (max-width: 820px) {
+      .vaade-sulge {
+        top: auto;
+        right: 50%;
+        left: auto;
+        bottom: max(.85rem, env(safe-area-inset-bottom, 0px));
+        transform: translateX(50%);
+        min-width: 7.2rem;
+        background: #2b1c16;
+        border-color: #e2c39a;
+        font-size: 1.35rem;
+      }
+      .vaade-sulge .sona { display: inline; }
+      .vaade-suur img { max-height: calc(100dvh - 9.5rem); }
     }
     .vaade-riba-aken {
       width: 100%;
@@ -360,12 +411,67 @@
     }
     .contact p { margin: .35rem 0; color: var(--muted); }
     footer {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 35;
       background: var(--dark);
       color: #e8d8c6;
-      padding: 1.6rem 1.2rem 2rem;
+      padding: 1rem 1.2rem calc(1rem + env(safe-area-inset-bottom, 0px));
       text-align: center;
       font-size: .88rem;
     }
+    footer a { color: #f6eee2; text-decoration: none; font-size: 1.05rem; }
+    span.tarn { color: #c0392b; font-weight: 700; font-size: .8em; }
+    .soov-vorm label { display:block; margin:.65rem 0 .2rem; color: var(--muted); }
+    .soov-vorm input, .soov-vorm select {
+      width:100%; padding:.55rem .65rem; font:inherit;
+      border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink);
+    }
+    .soov-vorm .rida { display:flex; gap:.55rem; align-items:flex-start; margin:.75rem 0; }
+    .soov-vorm .rida input { width:auto; }
+    #soel .saada, .soov-vorm .saada {
+      display:block; width:100%; margin-top:.85rem; padding:.7rem .8rem;
+      font:inherit; background:var(--dark); color:#f6eee2; border:0; border-radius:8px; cursor:pointer;
+    }
+    .soov-vorm .euro { color: var(--accent); margin:.35rem 0 .5rem; }
+    #soovTulem { color:#3d5a3d; line-height:1.45; margin:.4rem 0 .2rem; }
+    #soovTulem .soov-pealkiri {
+      margin: 0 0 .75rem;
+      font-size: 2rem;
+      line-height: 1.2;
+      font-weight: 700;
+      color: #2f6b3a;
+    }
+    #soovTulem .soov-lause {
+      margin: 0 0 .65rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    #soovTulem .soov-lause:last-child { margin-bottom: 0; }
+    #soovOotab {
+      display:none; align-items:center; gap:.7rem;
+      color: var(--muted); margin:.5rem 0 .2rem;
+    }
+    #soovOotab.sees { display:flex; }
+    .soov-rongas {
+      width:1.15rem; height:1.15rem; flex:0 0 1.15rem;
+      border:2px solid #cbb9a4; border-top-color:#1a110d;
+      border-radius:50%; animation: soovTiir 0.7s linear infinite;
+    }
+    @keyframes soovTiir { to { transform: rotate(360deg); } }
+        .soel-kysi { margin: .15rem 0 .45rem; font-size: 1.05rem; color: var(--ink); white-space: pre-line; }
+    .soel-valikud { display:flex; gap:.4rem; margin:.2rem 0 .45rem; }
+    .soel-valikud label {
+      flex:1; min-width:0; height:2.15rem; display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--line); border-radius:8px; background:#fff;
+      color:var(--ink); font-size:1.15rem; font-weight:700; cursor:pointer;
+    }
+    .soel-valikud input { display:none; }
+    .soel-valikud label:has(input:checked) {
+      border-color: var(--accent); background: #f3e6d4;
+    }
+    .peidus { display:none; }
     .empty { color: var(--muted); }
 
     .raamat {
@@ -560,6 +666,7 @@
         <div class="langs">
           <button type="button" data-lang="et" class="on">ET</button>
           <button type="button" data-lang="ru">RU</button>
+          <button type="button" data-lang="tr">TR</button>
           <button type="button" data-lang="en">EN</button>
         </div>
       </div>
@@ -568,8 +675,10 @@
   <header class="hero">
     <div class="hero-inner">
       <p class="eyebrow" data-i="eyebrow">Kehra · parmupill · didgeridoo · kausid</p>
-      <h1>Kahe Vahel</h1>
-      <p class="lead" data-i="lead">Heli on kuulda ja kehas tunda.</p>
+      <div class="hero-nimi">
+        <h1>Kahe Vahel</h1>
+        <p class="lead" data-i="lead">Heli, mida kuuled kehaga.</p>
+      </div>
     </div>
   </header>
 
@@ -584,6 +693,45 @@
       <div class="acc-clip">
         <div class="body">
           <ul class="list" id="list"></ul>
+          <details class="inner" id="soov">
+            <summary data-i="soov_silt">Osalen</summary>
+            <div id="soel">
+              <p class="soel-kysi" data-i="soov_soel">Et soov tuleks inimeselt.<br>2 + 1 = ?</p>
+              <div class="soel-valikud" id="soelValikud">
+                <label><input type="radio" name="soelValik" value="2"> 2</label>
+                <label><input type="radio" name="soelValik" value="3"> 3</label>
+                <label><input type="radio" name="soelValik" value="4"> 4</label>
+                <label><input type="radio" name="soelValik" value="5"> 5</label>
+                <label><input type="radio" name="soelValik" value="6"> 6</label>
+              </div>
+              <button type="button" class="saada" id="soelEdasi" data-i="soel_edasi">Edasi</button>
+            </div>
+            <form id="soovVorm" class="soov-vorm peidus" method="post" autocomplete="off">
+              <input type="hidden" name="voti" id="soovVoti" value="">
+              <input type="hidden" name="tagasi" id="soovTagasi" value="">
+              <input type="hidden" name="keel" id="soovKeel" value="et">
+              <input type="text" name="hp" tabindex="-1" autocomplete="off" class="peidus" aria-hidden="true">
+              <label><span data-i="soov_nimi">Nimi</span> <span class="tarn">*</span></label>
+              <input name="nimi" required autocomplete="name">
+              <label data-i="soov_yritus">Milline rännak</label>
+              <select name="yritus" id="soovYritus"></select>
+              <p class="euro" id="soovEuro"></p>
+              <label><span data-i="soov_email">Email</span> <span class="tarn">*</span></label>
+              <input name="email" type="email" required autocomplete="email" inputmode="email">
+              <label><span data-i="soov_telefon">Telefon</span> <span class="tarn">*</span></label>
+              <input name="telefon" type="tel" required autocomplete="tel" inputmode="tel">
+              <label class="rida">
+                <input type="checkbox" name="uudiskiri" id="soovUudis">
+                <span data-i="soov_uudis">Tahan emailile teadet järgmistest rännakutest.</span>
+              </label>
+              <button type="submit" class="saada" data-i="soov_saada">Saada soov</button>
+            </form>
+            <p id="soovOotab" class="peidus" aria-live="polite">
+              <span class="soov-rongas" aria-hidden="true"></span>
+              <span data-i="soov_ootab">Saadan…</span>
+            </p>
+            <div id="soovTulem" class="peidus" aria-live="polite"></div>
+          </details>
         </div>
       </div>
     </details>
@@ -596,7 +744,7 @@
         <details class="inner">
           <summary data-i="pikemalt">Pikemalt</summary>
           <div class="body">
-            <p data-i="mis_pikk"></p>
+            <p data-i="mis_pikk" style="white-space:pre-line"></p>
             <p data-i="mis_pillid"></p>
           </div>
         </details>
@@ -639,7 +787,7 @@
   </main>
 
   <div class="vaade" id="vaade">
-    <button type="button" class="vaade-sulge" id="vaadeSulge" aria-label="Sulge">×</button>
+    <button type="button" class="vaade-sulge" id="vaadeSulge" aria-label="Sulge"><span aria-hidden="true">×</span><span class="sona">Sulge</span></button>
     <div class="vaade-suur"><img id="vaadePilt" alt=""></div>
     <div class="vaade-riba-aken"><div class="vaade-riba" id="vaadeRiba"></div></div>
   </div>
@@ -658,7 +806,7 @@
     </div>
   </div>
 
-  <footer data-i="jalus">Helivann · Kehra</footer>
+  <footer><a href="#soov" id="jalgSoov" data-i="osalemissoov">Osalemissoov</a></footer>
 
   <script>
     let T = {};
@@ -674,6 +822,8 @@
     function apply() {
       const pack = Object.assign({}, T[lang] || T.et, sisu[lang] || sisu.et || {});
       document.documentElement.lang = lang;
+      const keelVali = document.getElementById("soovKeel");
+      if (keelVali) keelVali.value = lang;
       document.querySelectorAll("[data-i]").forEach(el => {
         const k = el.getAttribute("data-i");
         if (pack[k]) el.textContent = pack[k];
@@ -696,7 +846,7 @@
       const kast = document.getElementById("huvitavSisu");
       if (kast) {
         const p = sisu[lang] || sisu.et || {};
-        const read = (lang === "et") ? "Ava artikkel" : (lang === "ru") ? "Открыть статью" : "Open article";
+        const read = ({et:"Ava artikkel",ru:"Открыть статью",tr:"Yazıyı aç",en:"Open article"})[lang] || "Open article";
         let html = "";
         for (let n = 1; n <= 3; n++) {
           const txt = p["huvitav_" + n] || "";
@@ -708,12 +858,15 @@
         kast.innerHTML = html;
       }
       renderList();
+      taidaSoovValik();
     }
     function renderList() {
       const pack = (T[lang] || T.et);
       const nextBox = document.getElementById("jargmine");
       const list = document.getElementById("list");
-      const soon = rowsCache.slice().sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
+      const tana = new Date();
+      const tanaStr = tana.getFullYear() + "-" + String(tana.getMonth()+1).padStart(2,"0") + "-" + String(tana.getDate()).padStart(2,"0");
+      const soon = rowsCache.filter(e => (e.kuupaev || "") >= tanaStr).slice().sort((a, b) => a.kuupaev.localeCompare(b.kuupaev));
       if (!soon.length) {
         nextBox.innerHTML = "<span class='empty'>" + pack.tyhi + "</span>";
         list.innerHTML = "";
@@ -772,15 +925,41 @@
       });
     }
 
+    function keriPaiste(el) {
+      const riba = document.querySelector(".riba");
+      const vari = (riba ? riba.getBoundingClientRect().height : 64) + 10;
+      const y = el.getBoundingClientRect().top + window.scrollY - vari;
+      window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    }
+
+    function jalusPadi(on) {
+      const w = document.querySelector(".wrap");
+      if (!w) return;
+      if (window.matchMedia("(max-width: 820px)").matches) {
+        w.style.paddingBottom = on ? "2rem" : "";
+      } else {
+        w.style.paddingBottom = "";
+      }
+    }
+
+    function keriJalusNaha() {
+      const foot = document.querySelector("footer");
+      if (!foot) return;
+      const y = foot.getBoundingClientRect().bottom + window.scrollY - window.innerHeight + 6;
+      window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    }
+
     function avaKoht(id) {
       const el = document.getElementById(id);
       if (!el) return;
+      jalusPadi(id === "kontakt");
       sulgeTeised(id).then(() => {
         if (el.tagName === "DETAILS") {
           el.open = false;
           el.classList.remove("avatud");
         }
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (id === "kontakt") keriJalusNaha();
+        else keriPaiste(el);
         kuiKeriLopp(() => {
           if (el.tagName === "DETAILS") {
             el.open = true;
@@ -788,6 +967,8 @@
               requestAnimationFrame(() => el.classList.add("avatud"));
             });
           }
+          if (id === "kontakt") keriJalusNaha();
+          else keriPaiste(el);
           if (id === "pildid" && window.avaaGalerii) window.avaaGalerii(0);
         });
       });
@@ -809,6 +990,7 @@
     document.getElementById("logo").addEventListener("click", (e) => {
       e.preventDefault();
       history.replaceState(null, "", "./");
+      jalusPadi(false);
       sulgeTeised("").then(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
@@ -837,23 +1019,24 @@
     function ehitaGalerii(nimed) {
       const kast = document.getElementById("galerii");
       if (!kast) return;
-      kast.innerHTML = (nimed || []).map(n => {
-        const fail = (typeof n === "string") ? n : (n.fail || "");
-        if (!fail) return "";
-        return '<img src="pildid/' + fail + '" alt="">';
-      }).join("");
-      galeriiVaade();
+      const failid = (nimed || []).map(n => (typeof n === "string") ? n : (n.fail || "")).filter(Boolean);
+      window._galFailid = failid;
+      kast.innerHTML = failid.length ? '<img src="pildid/' + failid[0] + '" alt="">' : "";
+      galeriiVaade(failid);
       raamatToo();
     }
 
-    function galeriiVaade() {
-      const kaaned = [...document.querySelectorAll(".gallery img")];
+    function galeriiVaade(failid) {
       const kast = document.getElementById("vaade");
       const suur = document.getElementById("vaadePilt");
       const riba = document.getElementById("vaadeRiba");
       if (!kast || !suur || !riba) return;
       riba.innerHTML = "";
+      const kaaned = (failid && failid.length ? failid : (window._galFailid || [])).map(f => ({ src: "pildid/" + f }));
+      const uks = document.querySelector(".gallery img");
+      if (uks) uks.onclick = () => naitaStart(0);
       if (!kaaned.length) return;
+      function naitaStart(n) { if (window.avaaGalerii) window.avaaGalerii(n); }
       let i = 0;
       let taimer = null;
 
@@ -872,8 +1055,9 @@
         th.alt = "";
         th.addEventListener("click", () => naita(n));
         riba.appendChild(th);
-        img.onclick = () => naita(n);
       });
+      const uksPilt = document.querySelector(".gallery img");
+      if (uksPilt) uksPilt.onclick = () => naita(0);
 
       function naita(n, restart) {
         i = (n + kaaned.length) % kaaned.length;
@@ -894,7 +1078,7 @@
       }
 
       document.getElementById("vaadeSulge").onclick = sulge;
-      kast.onclick = (e) => { if (e.target === kast) sulge(); };
+      kast.onclick = (e) => { if (e.target === kast || e.target === suur) sulge(); };
       document.addEventListener("keydown", (e) => {
         if (!kast.classList.contains("sees")) return;
         if (e.key === "Escape") sulge();
@@ -1096,6 +1280,195 @@
       window.avaRaamat = ava;
       window.sulgeRaamat = sulge;
     }
+
+
+    let soelOk = false;
+    let soovSaadetud = false;
+    function peidaSoovSisu() {
+      const soel = document.getElementById("soel");
+      const vorm = document.getElementById("soovVorm");
+      const ootab = document.getElementById("soovOotab");
+      const tulem = document.getElementById("soovTulem");
+      if (soel) soel.classList.add("peidus");
+      if (vorm) vorm.classList.add("peidus");
+      if (ootab) { ootab.classList.add("peidus"); ootab.classList.remove("sees"); }
+      if (tulem) tulem.classList.add("peidus");
+    }
+    function naitaSoovOotus() {
+      peidaSoovSisu();
+      const ootab = document.getElementById("soovOotab");
+      if (ootab) { ootab.classList.remove("peidus"); ootab.classList.add("sees"); }
+    }
+    function naitaSoovTeavitus() {
+      peidaSoovSisu();
+      const tulem = document.getElementById("soovTulem");
+      const pack = T[lang] || T.et || {};
+      if (!tulem) return;
+      const pea = pack.soov_teel_pealkiri || "TEAVITUS SAADETUD";
+      const kaks = pack.soov_teel_kinnitus || "Peale kinnitamist laekub kiri e-postkasti.";
+      const kolm = pack.soov_teel_meelde || "Iga klient saab kaks päeva enne seanssi meeldetuletuse e-kirja.";
+      tulem.innerHTML = "<p class='soov-pealkiri'></p><p class='soov-lause'></p><p class='soov-lause'></p>";
+      tulem.querySelector(".soov-pealkiri").textContent = pea;
+      const laused = tulem.querySelectorAll(".soov-lause");
+      laused[0].textContent = kaks;
+      laused[1].textContent = kolm;
+      tulem.classList.remove("peidus");
+    }
+    (function puhastaPärastSaatmist() {
+      const q = new URLSearchParams(location.search);
+      if (q.get("saadetud") !== "1") return;
+      soovSaadetud = true;
+      const vorm = document.getElementById("soovVorm");
+      if (vorm) vorm.reset();
+      naitaSoovTeavitus();
+      history.replaceState({}, "", location.pathname + (location.hash || ""));
+    })();
+    function yritusId(e, i) { return e.id || ("U" + String(i + 1).padStart(3, "0")); }
+    function tulevased() {
+      const tana = new Date();
+      const tanaStr = tana.getFullYear() + "-" + String(tana.getMonth()+1).padStart(2,"0") + "-" + String(tana.getDate()).padStart(2,"0");
+      return rowsCache.filter(e => (e.kuupaev || "") >= tanaStr).slice().sort((a, b) => (a.kuupaev || "").localeCompare(b.kuupaev || ""));
+    }
+    function taidaSoovValik() {
+      const sel = document.getElementById("soovYritus");
+      if (!sel) return;
+      const soon = tulevased();
+      sel.innerHTML = soon.map((e, i) => {
+        const id = yritusId(e, i);
+        const nimi = (formaat(e.kuupaev) + " · " + (e.kellaaeg || "") + " · " + (e.koht || "")).trim();
+        return "<option value='" + id + "' data-euro='" + (e.euro || "") + "'>" + nimi + "</option>";
+      }).join("");
+      uuendaEuro();
+      const vorm = document.getElementById("soovVorm");
+      if (vorm) vorm.removeAttribute("action");
+      const voti = document.getElementById("soovVoti");
+      if (voti) voti.value = seaded.soov_voti || "kahevahel-soov";
+      const tagasi = document.getElementById("soovTagasi");
+      if (tagasi) tagasi.value = "https://ivar.neio.ee/soundbath/";
+    }
+    function uuendaEuro() {
+      const sel = document.getElementById("soovYritus");
+      const el = document.getElementById("soovEuro");
+      if (!sel || !el) return;
+      const pack = T[lang] || T.et || {};
+      const opt = sel.selectedOptions[0];
+      const euro = opt ? opt.getAttribute("data-euro") : "";
+      el.textContent = euro ? ((pack.soov_euro || "Selle õhtu energiavahetus:") + " " + euro + " €") : "";
+    }
+    function naitaSoovVorm() {
+      document.getElementById("soel").classList.add("peidus");
+      document.getElementById("soovVorm").classList.remove("peidus");
+    }
+    function naitaSoovSoel() {
+      if (soovSaadetud) { naitaSoovTeavitus(); return; }
+      if (soelOk) naitaSoovVorm();
+      else {
+        peidaSoovSisu();
+        document.getElementById("soel").classList.remove("peidus");
+      }
+    }
+    function avaSoov() {
+      const tulekul = document.getElementById("tulekul");
+      const soov = document.getElementById("soov");
+      if (tulekul) {
+        tulekul.open = true;
+        requestAnimationFrame(() => tulekul.classList.add("avatud"));
+      }
+      if (soov) soov.open = true;
+      naitaSoovSoel();
+      const siht = document.getElementById("soovTulem") && !document.getElementById("soovTulem").classList.contains("peidus")
+        ? document.getElementById("soovTulem")
+        : (document.getElementById("soovVorm") && !document.getElementById("soovVorm").classList.contains("peidus")
+          ? document.getElementById("soovVorm")
+          : document.getElementById("soel"));
+      setTimeout(() => {
+        if (!siht) return;
+        const foot = document.querySelector("footer");
+        const vari = foot ? foot.getBoundingClientRect().height + 12 : 70;
+        const y = siht.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+      }, 280);
+    }
+    document.getElementById("soov").querySelector("summary").addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const soov = document.getElementById("soov");
+      if (soov.open) { soov.open = false; return; }
+      avaSoov();
+    });
+    (function () {
+      const q = new URLSearchParams(location.search);
+      if (q.get("saadetud") === "1") {
+        soovSaadetud = true;
+        const vorm = document.getElementById("soovVorm");
+        if (vorm) vorm.reset();
+        sessionStorage.removeItem("soovInimene");
+        naitaSoovTeavitus();
+        history.replaceState({}, "", location.pathname + location.hash);
+      }
+    })();
+    const jalg = document.getElementById("jalgSoov");
+    if (jalg) {
+      jalg.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        avaSoov();
+      });
+    }
+    document.getElementById("soelEdasi").addEventListener("click", () => {
+      const pack = T[lang] || T.et || {};
+      const val = document.querySelector("input[name=soelValik]:checked");
+      if (!val || val.value !== "3") {
+        alert(pack.soel_vale || "Proovi veel.");
+        return;
+      }
+      soelOk = true;
+      naitaSoovVorm();
+    });
+    document.getElementById("soovYritus").addEventListener("change", uuendaEuro);
+    document.getElementById("soovVorm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const keelVali = document.getElementById("soovKeel");
+      if (keelVali) keelVali.value = lang;
+      const pack = T[lang] || T.et || {};
+      const f = e.target;
+      const nupp = f.querySelector(".saada");
+      const tulem = document.getElementById("soovTulem");
+      if (!f.nimi.value.trim() || !f.email.value.trim() || !f.telefon.value.trim()) {
+        alert(pack.soov_kohustus || "Nimi, email ja telefon on vaja.");
+        return;
+      }
+      const url = (seaded && seaded.soov_url) || f.action;
+      if (!url) {
+        alert("Vorm ei ole veel ühendatud.");
+        return;
+      }
+      const fd = new FormData(f);
+      fd.set("ajax", "1");
+      fd.set("keel", lang);
+      if (nupp) nupp.disabled = true;
+      naitaSoovOotus();
+      fetch(url, { method: "POST", body: fd, mode: "no-cors" })
+        .then(function () {
+          f.reset();
+          soelOk = false;
+          soovSaadetud = true;
+          naitaSoovTeavitus();
+        })
+        .catch(function () {
+          document.getElementById("soovVorm").classList.remove("peidus");
+          document.getElementById("soovOotab").classList.add("peidus");
+          document.getElementById("soovOotab").classList.remove("sees");
+          if (tulem) {
+            tulem.textContent = pack.soov_viga || "Ei läinud läbi. Proovi uuesti või kirjuta kahevahel@neio.ee";
+            tulem.style.color = "#8b2e2e";
+            tulem.classList.remove("peidus");
+          }
+        })
+        .finally(function () {
+          if (nupp) nupp.disabled = false;
+        });
+    });
 
     Promise.all([
       fetch("tekstid.json", { cache: "no-store" }).then(r => r.json()),
