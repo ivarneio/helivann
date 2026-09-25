@@ -38,9 +38,13 @@
     "soov_telefon": "Telefon",
     "soov_uudis": "Tahan emailile teadet järgmistest rännakutest.",
     "soov_saada": "Saada soov",
-    "soov_teel": "Soov on teel. Kui email on kirjas, saad sealt kviitungi.",
+    "soov_teel": "Teavitus saadetud.",
     "soov_euro": "Selle õhtu energiavahetus:",
-    "soov_kohustus": "Nimi, email ja telefon on vaja."
+    "soov_kohustus": "Nimi, email ja telefon on vaja.",
+    "soov_ootab": "Saadan…",
+    "soov_teel_pealkiri": "TEAVITUS SAADETUD",
+    "soov_teel_kinnitus": "",
+    "soov_teel_meelde": ""
   },
   "en": {
     "eyebrow": "drum · jew's harp · didgeridoo · singing bowls",
@@ -81,9 +85,13 @@
     "soov_telefon": "Phone",
     "soov_uudis": "I want email about later journeys.",
     "soov_saada": "Send request",
-    "soov_teel": "The request is on its way. If you left an email, a note will come there.",
+    "soov_teel": "Notice sent.",
     "soov_euro": "Energy exchange for this evening:",
-    "soov_kohustus": "Name, email and phone are needed."
+    "soov_kohustus": "Name, email and phone are needed.",
+    "soov_ootab": "Sending…",
+    "soov_teel_pealkiri": "NOTICE SENT",
+    "soov_teel_kinnitus": "",
+    "soov_teel_meelde": ""
   },
   "ru": {
     "eyebrow": "барабан · варган · диджериду · поющие чаши",
@@ -124,9 +132,13 @@
     "soov_telefon": "Телефон",
     "soov_uudis": "Хочу письма о следующих вечерах.",
     "soov_saada": "Отправить",
-    "soov_teel": "Заявка ушла. Если есть почта, туда придёт отметка.",
+    "soov_teel": "Уведомление отправлено.",
     "soov_euro": "Энергообмен этого вечера:",
-    "soov_kohustus": "Нужны имя, почта и телефон."
+    "soov_kohustus": "Нужны имя, почта и телефон.",
+    "soov_ootab": "Отправляю…",
+    "soov_teel_pealkiri": "УВЕДОМЛЕНИЕ ОТПРАВЛЕНО",
+    "soov_teel_kinnitus": "",
+    "soov_teel_meelde": ""
   },
   "tr": {
     "eyebrow": "davul · ağız kopuzu · didgeridoo · öten kaseler",
@@ -167,8 +179,12 @@
     "soov_telefon": "Telefon",
     "soov_uudis": "Sonraki yolculuklar için e-posta istiyorum.",
     "soov_saada": "Gönder",
-    "soov_teel": "İstek yolda. E-posta yazdıysan oraya bir not gelir.",
+    "soov_teel": "Bildirim gönderildi.",
     "soov_euro": "Bu akşamın enerji değişimi:",
-    "soov_kohustus": "Ad, e-posta ve telefon gerekli."
+    "soov_kohustus": "Ad, e-posta ve telefon gerekli.",
+    "soov_ootab": "Gönderiliyor…",
+    "soov_teel_pealkiri": "BİLDİRİM GÖNDERİLDİ",
+    "soov_teel_kinnitus": "",
+    "soov_teel_meelde": ""
   }
 }
