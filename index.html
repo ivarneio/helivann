@@ -429,6 +429,18 @@
       font:inherit; background:var(--dark); color:#f6eee2; border:0; border-radius:8px; cursor:pointer;
     }
     .soov-vorm .euro { color: var(--accent); margin:.35rem 0 .5rem; }
+    #soovTulem { color:#3d5a3d; line-height:1.45; margin:.4rem 0 .2rem; }
+    #soovOotab {
+      display:none; align-items:center; gap:.7rem;
+      color: var(--muted); margin:.5rem 0 .2rem;
+    }
+    #soovOotab.sees { display:flex; }
+    .soov-rongas {
+      width:1.15rem; height:1.15rem; flex:0 0 1.15rem;
+      border:2px solid #cbb9a4; border-top-color:#1a110d;
+      border-radius:50%; animation: soovTiir 0.7s linear infinite;
+    }
+    @keyframes soovTiir { to { transform: rotate(360deg); } }
         .soel-kysi { margin: .15rem 0 .45rem; font-size: 1.05rem; color: var(--ink); white-space: pre-line; }
     .soel-valikud { display:flex; gap:.4rem; margin:.2rem 0 .45rem; }
     .soel-valikud label {
@@ -695,7 +707,11 @@
               </label>
               <button type="submit" class="saada" data-i="soov_saada">Saada soov</button>
             </form>
-            <p id="soovTulem" class="peidus" style="color:#3d5a3d"></p>
+            <p id="soovOotab" class="peidus" aria-live="polite">
+              <span class="soov-rongas" aria-hidden="true"></span>
+              <span data-i="soov_ootab">Saadan…</span>
+            </p>
+            <p id="soovTulem" class="peidus" style="color:#3d5a3d;white-space:pre-line"></p>
           </details>
         </div>
       </div>
@@ -1248,17 +1264,39 @@
 
 
     let soelOk = false;
+    let soovSaadetud = false;
+    function peidaSoovSisu() {
+      const soel = document.getElementById("soel");
+      const vorm = document.getElementById("soovVorm");
+      const ootab = document.getElementById("soovOotab");
+      const tulem = document.getElementById("soovTulem");
+      if (soel) soel.classList.add("peidus");
+      if (vorm) vorm.classList.add("peidus");
+      if (ootab) { ootab.classList.add("peidus"); ootab.classList.remove("sees"); }
+      if (tulem) tulem.classList.add("peidus");
+    }
+    function naitaSoovOotus() {
+      peidaSoovSisu();
+      const ootab = document.getElementById("soovOotab");
+      if (ootab) { ootab.classList.remove("peidus"); ootab.classList.add("sees"); }
+    }
+    function naitaSoovTeavitus() {
+      peidaSoovSisu();
+      const tulem = document.getElementById("soovTulem");
+      const pack = T[lang] || T.et || {};
+      if (tulem) {
+        tulem.textContent = pack.soov_teel || "Teavitus saadetud. Peale kinnitamist laekub kiri e-postkasti. Iga klient saab kaks päeva enne seanssi meeldetuletuse e-kirja.";
+        tulem.style.color = "#3d5a3d";
+        tulem.classList.remove("peidus");
+      }
+    }
     (function puhastaPärastSaatmist() {
       const q = new URLSearchParams(location.search);
       if (q.get("saadetud") !== "1") return;
+      soovSaadetud = true;
       const vorm = document.getElementById("soovVorm");
       if (vorm) vorm.reset();
-      soelOk = false;
-      const tulem = document.getElementById("soovTulem");
-      if (tulem) {
-        tulem.textContent = "Sõnum on saadetud. Kinnituse email saabub peatselt.";
-        tulem.classList.remove("peidus");
-      }
+      naitaSoovTeavitus();
       history.replaceState({}, "", location.pathname + (location.hash || ""));
     })();
     function yritusId(e, i) { return e.id || ("U" + String(i + 1).padStart(3, "0")); }
@@ -1278,11 +1316,11 @@
       }).join("");
       uuendaEuro();
       const vorm = document.getElementById("soovVorm");
-      if (vorm && seaded.soov_url) vorm.action = seaded.soov_url;
+      if (vorm) vorm.removeAttribute("action");
       const voti = document.getElementById("soovVoti");
       if (voti) voti.value = seaded.soov_voti || "kahevahel-soov";
       const tagasi = document.getElementById("soovTagasi");
-      if (tagasi) tagasi.value = location.origin + location.pathname;
+      if (tagasi) tagasi.value = "https://ivar.neio.ee/soundbath/";
     }
     function uuendaEuro() {
       const sel = document.getElementById("soovYritus");
@@ -1298,27 +1336,27 @@
       document.getElementById("soovVorm").classList.remove("peidus");
     }
     function naitaSoovSoel() {
+      if (soovSaadetud) { naitaSoovTeavitus(); return; }
       if (soelOk) naitaSoovVorm();
       else {
+        peidaSoovSisu();
         document.getElementById("soel").classList.remove("peidus");
-        document.getElementById("soovVorm").classList.add("peidus");
-        document.getElementById("soovTulem").classList.add("peidus");
       }
     }
     function avaSoov() {
       const tulekul = document.getElementById("tulekul");
       const soov = document.getElementById("soov");
-      const tulem = document.getElementById("soovTulem");
-      if (tulem) tulem.classList.add("peidus");
       if (tulekul) {
         tulekul.open = true;
         requestAnimationFrame(() => tulekul.classList.add("avatud"));
       }
       if (soov) soov.open = true;
       naitaSoovSoel();
-      const siht = document.getElementById("soovVorm") && !document.getElementById("soovVorm").classList.contains("peidus")
-        ? document.getElementById("soovVorm")
-        : document.getElementById("soel");
+      const siht = document.getElementById("soovTulem") && !document.getElementById("soovTulem").classList.contains("peidus")
+        ? document.getElementById("soovTulem")
+        : (document.getElementById("soovVorm") && !document.getElementById("soovVorm").classList.contains("peidus")
+          ? document.getElementById("soovVorm")
+          : document.getElementById("soel"));
       setTimeout(() => {
         if (!siht) return;
         const foot = document.querySelector("footer");
@@ -1337,14 +1375,11 @@
     (function () {
       const q = new URLSearchParams(location.search);
       if (q.get("saadetud") === "1") {
-        const tulem = document.getElementById("soovTulem");
+        soovSaadetud = true;
         const vorm = document.getElementById("soovVorm");
         if (vorm) vorm.reset();
         sessionStorage.removeItem("soovInimene");
-        if (tulem) {
-          tulem.textContent = (T[lang] || T.et || {}).soov_teel || "Sõnum on saadetud. Kinnituse email saabub peatselt.";
-          tulem.classList.remove("peidus");
-        }
+        naitaSoovTeavitus();
         history.replaceState({}, "", location.pathname + location.hash);
       }
     })();
@@ -1368,19 +1403,47 @@
     });
     document.getElementById("soovYritus").addEventListener("change", uuendaEuro);
     document.getElementById("soovVorm").addEventListener("submit", (e) => {
+      e.preventDefault();
       const keelVali = document.getElementById("soovKeel");
       if (keelVali) keelVali.value = lang;
       const pack = T[lang] || T.et || {};
       const f = e.target;
+      const nupp = f.querySelector(".saada");
+      const tulem = document.getElementById("soovTulem");
       if (!f.nimi.value.trim() || !f.email.value.trim() || !f.telefon.value.trim()) {
-        e.preventDefault();
         alert(pack.soov_kohustus || "Nimi, email ja telefon on vaja.");
         return;
       }
-      if (!f.action) {
-        e.preventDefault();
+      const url = (seaded && seaded.soov_url) || f.action;
+      if (!url) {
         alert("Vorm ei ole veel ühendatud.");
+        return;
       }
+      const fd = new FormData(f);
+      fd.set("ajax", "1");
+      fd.set("keel", lang);
+      if (nupp) nupp.disabled = true;
+      naitaSoovOotus();
+      fetch(url, { method: "POST", body: fd, mode: "no-cors" })
+        .then(function () {
+          f.reset();
+          soelOk = false;
+          soovSaadetud = true;
+          naitaSoovTeavitus();
+        })
+        .catch(function () {
+          document.getElementById("soovVorm").classList.remove("peidus");
+          document.getElementById("soovOotab").classList.add("peidus");
+          document.getElementById("soovOotab").classList.remove("sees");
+          if (tulem) {
+            tulem.textContent = pack.soov_viga || "Ei läinud läbi. Proovi uuesti või kirjuta kahevahel@neio.ee";
+            tulem.style.color = "#8b2e2e";
+            tulem.classList.remove("peidus");
+          }
+        })
+        .finally(function () {
+          if (nupp) nupp.disabled = false;
+        });
     });
 
     Promise.all([
