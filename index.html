@@ -63,8 +63,10 @@
       justify-content: flex-end;
     }
     .hero-inner {
-      width: min(42rem, calc(100% - 2.2rem));
+      width: 100%;
+      max-width: none;
       margin: 0 auto;
+      text-align: center;
     }
     .hero-top {
       width: 100%;
@@ -125,10 +127,13 @@
       text-transform: uppercase;
       opacity: .78;
       margin: 0 0 .7rem;
+      text-align: center;
+      width: 100%;
     }
     .hero-nimi {
-      display: inline-block;
+      display: block;
       text-align: center;
+      width: 100%;
     }
     .hero h1 {
       font-family: "Cormorant Garamond", Georgia, serif;
@@ -137,7 +142,7 @@
       line-height: 1.05;
       margin: 0 0 .55rem;
     }
-    .hero .lead { margin: 0 0 1.3rem; font-size: 1.05rem; max-width: none; opacity: .92; }
+    .hero .lead { margin: 0 0 1.3rem; font-size: 1.05rem; max-width: none; opacity: .92; text-align: center; }
     nav.toc {
       display: flex;
       flex-wrap: wrap;
@@ -430,6 +435,20 @@
     }
     .soov-vorm .euro { color: var(--accent); margin:.35rem 0 .5rem; }
     #soovTulem { color:#3d5a3d; line-height:1.45; margin:.4rem 0 .2rem; }
+    #soovTulem .soov-pealkiri {
+      margin: 0 0 .75rem;
+      font-size: 2rem;
+      line-height: 1.2;
+      font-weight: 700;
+      color: #2f6b3a;
+    }
+    #soovTulem .soov-lause {
+      margin: 0 0 .65rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    #soovTulem .soov-lause:last-child { margin-bottom: 0; }
     #soovOotab {
       display:none; align-items:center; gap:.7rem;
       color: var(--muted); margin:.5rem 0 .2rem;
@@ -711,7 +730,7 @@
               <span class="soov-rongas" aria-hidden="true"></span>
               <span data-i="soov_ootab">Saadan…</span>
             </p>
-            <p id="soovTulem" class="peidus" style="color:#3d5a3d;white-space:pre-line"></p>
+            <div id="soovTulem" class="peidus" aria-live="polite"></div>
           </details>
         </div>
       </div>
@@ -1284,11 +1303,23 @@
       peidaSoovSisu();
       const tulem = document.getElementById("soovTulem");
       const pack = T[lang] || T.et || {};
-      if (tulem) {
-        tulem.textContent = pack.soov_teel || "Teavitus saadetud. Peale kinnitamist laekub kiri e-postkasti. Iga klient saab kaks päeva enne seanssi meeldetuletuse e-kirja.";
-        tulem.style.color = "#3d5a3d";
-        tulem.classList.remove("peidus");
-      }
+      if (!tulem) return;
+      let viimane = {};
+      try { viimane = JSON.parse(sessionStorage.getItem("soovViimane") || "{}"); } catch (e) {}
+      const pea = pack.soov_teel_pealkiri || pack.soov_teel || "TEAVITUS SAADETUD";
+      const kaks = String(pack.soov_teel_kinnitus || "")
+        .split("{{yritus}}").join(viimane.yritus || "");
+      const kolm = String(pack.soov_teel_meelde || "")
+        .split("{{email}}").join(viimane.email || "");
+      let html = "<p class='soov-pealkiri'></p>";
+      if (kaks) html += "<p class='soov-lause'></p>";
+      if (kolm) html += "<p class='soov-lause'></p>";
+      tulem.innerHTML = html;
+      tulem.querySelector(".soov-pealkiri").textContent = pea;
+      const laused = tulem.querySelectorAll(".soov-lause");
+      if (laused[0] && kaks) laused[0].textContent = kaks;
+      if (laused[1] && kolm) laused[1].textContent = kolm;
+      tulem.classList.remove("peidus");
     }
     (function puhastaPärastSaatmist() {
       const q = new URLSearchParams(location.search);
@@ -1424,6 +1455,12 @@
       fd.set("keel", lang);
       if (nupp) nupp.disabled = true;
       naitaSoovOotus();
+      const sel = document.getElementById("soovYritus");
+      const yritusTekst = sel && sel.selectedOptions[0] ? sel.selectedOptions[0].textContent.trim() : "";
+      const emailTekst = (f.email.value || "").trim();
+      try {
+        sessionStorage.setItem("soovViimane", JSON.stringify({ yritus: yritusTekst, email: emailTekst }));
+      } catch (err) {}
       fetch(url, { method: "POST", body: fd, mode: "no-cors" })
         .then(function () {
           f.reset();
