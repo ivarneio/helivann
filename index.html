@@ -1483,22 +1483,52 @@
         });
     });
 
+    function laeTabeliNimekiri(url) {
+      return new Promise(function (resolve, reject) {
+        if (!url) { reject(); return; }
+        const baas = url.split("?")[0];
+        const cb = "kvList" + Date.now();
+        const t = setTimeout(function () {
+          cleanup();
+          reject();
+        }, 8000);
+        function cleanup() {
+          clearTimeout(t);
+          try { delete window[cb]; } catch (e) {}
+          if (s && s.parentNode) s.parentNode.removeChild(s);
+        }
+        window[cb] = function (data) {
+          cleanup();
+          resolve(Array.isArray(data) ? data : []);
+        };
+        const s = document.createElement("script");
+        s.src = baas + "?list=1&callback=" + cb;
+        s.onerror = function () { cleanup(); reject(); };
+        document.head.appendChild(s);
+      });
+    }
+
     Promise.all([
       fetch("tekstid.json", { cache: "no-store" }).then(r => r.json()),
-      fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []),
       fetch("seaded.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({})),
       fetch("sisu.json", { cache: "no-store" }).then(r => r.json()).catch(() => ({ et: {}, en: {} })),
       fetch("pildid.json", { cache: "no-store" }).then(r => r.json()).catch(() => [])
-    ]).then(([tekstid, rows, s, sisuFail, pildid]) => {
+    ]).then(([tekstid, s, sisuFail, pildid]) => {
       T = tekstid;
-      rowsCache = rows;
       seaded = Object.assign(seaded, s);
       sisu = sisuFail;
-      apply();
       ehitaGalerii(pildid);
+      const url = seaded.soov_url || "";
+      return laeTabeliNimekiri(url).catch(function () {
+        return fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []);
+      });
+    }).then((rows) => {
+      rowsCache = Array.isArray(rows) ? rows : [];
+      apply();
     }).catch(() => {
       document.getElementById("jargmine").textContent = "Listi ei saanud laadida.";
     });
+
   </script>
 </body>
 </html>
