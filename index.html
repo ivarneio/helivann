@@ -282,6 +282,20 @@
       text-decoration: underline;
       text-underline-offset: .16em;
     }
+    .osalen-nupp {
+      flex: 0 0 auto;
+      margin: 0 .35rem 0 .8rem;
+      padding: .4rem .85rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      cursor: pointer;
+    }
     #jargmine .where { display: block; }
     details.acc summary::-webkit-details-marker { display: none; }
     details.acc summary::after {
@@ -703,6 +717,7 @@
           <span class="sum-silt" data-i="jargmine">Järgmine rännak</span>
           <span id="jargmine">Laen listi…</span>
         </div>
+        <button type="button" class="osalen-nupp" id="osalenNupp" data-i="soov_silt">Osalen</button>
       </summary>
       <div class="acc-clip">
         <div class="body">
@@ -997,6 +1012,8 @@
 
     document.querySelectorAll("details.acc > summary").forEach(s => {
       s.addEventListener("click", (e) => {
+        if (e.target.closest("a.kaart")) return;
+        if (e.target.closest("#osalenNupp")) return;
         e.preventDefault();
         const d = s.parentElement;
         if (d.open || d.classList.contains("avatud")) {
@@ -1007,6 +1024,19 @@
         }
       });
     });
+    const osalenNupp = document.getElementById("osalenNupp");
+    if (osalenNupp) {
+      osalenNupp.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        avaKoht("tulekul");
+        setTimeout(() => {
+          const soov = document.getElementById("soov");
+          if (soov) soov.open = true;
+          if (typeof naitaSoovSoel === "function") naitaSoovSoel();
+        }, 500);
+      });
+    }
 
     document.getElementById("logo").addEventListener("click", (e) => {
       e.preventDefault();
