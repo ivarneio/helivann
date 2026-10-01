@@ -722,8 +722,7 @@
       <div class="acc-clip">
         <div class="body">
           <ul class="list" id="list"></ul>
-          <details class="inner" id="soov">
-            <summary data-i="soov_silt">Osalen</summary>
+          <div class="inner peidus" id="soov">
             <div id="soel">
               <p class="soel-kysi" data-i="soov_soel">Et soov tuleks inimeselt.<br>2 + 1 = ?</p>
               <div class="soel-valikud" id="soelValikud">
@@ -760,7 +759,7 @@
               <span data-i="soov_ootab">Saadan…</span>
             </p>
             <div id="soovTulem" class="peidus" aria-live="polite"></div>
-          </details>
+          </div>
         </div>
       </div>
     </details>
@@ -1012,7 +1011,13 @@
 
     document.querySelectorAll("details.acc > summary").forEach(s => {
       s.addEventListener("click", (e) => {
-        if (e.target.closest("a.kaart")) return;
+        const link = e.target.closest("a.kaart");
+        if (link) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.open(link.href, "_blank", "noopener");
+          return;
+        }
         if (e.target.closest("#osalenNupp")) return;
         e.preventDefault();
         const d = s.parentElement;
@@ -1032,7 +1037,7 @@
         avaKoht("tulekul");
         setTimeout(() => {
           const soov = document.getElementById("soov");
-          if (soov) soov.open = true;
+          if (soov) soov.classList.remove("peidus");
           if (typeof naitaSoovSoel === "function") naitaSoovSoel();
         }, 500);
       });
@@ -1432,7 +1437,7 @@
         tulekul.open = true;
         requestAnimationFrame(() => tulekul.classList.add("avatud"));
       }
-      if (soov) soov.open = true;
+      if (soov) soov.classList.remove("peidus");
       naitaSoovSoel();
       const siht = document.getElementById("soovTulem") && !document.getElementById("soovTulem").classList.contains("peidus")
         ? document.getElementById("soovTulem")
@@ -1447,13 +1452,6 @@
         window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
       }, 280);
     }
-    document.getElementById("soov").querySelector("summary").addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const soov = document.getElementById("soov");
-      if (soov.open) { soov.open = false; return; }
-      avaSoov();
-    });
     (function () {
       const q = new URLSearchParams(location.search);
       if (q.get("saadetud") === "1") {
