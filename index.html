@@ -1561,7 +1561,7 @@
         const t = setTimeout(function () {
           cleanup();
           reject();
-        }, 8000);
+        }, 15000);
         function cleanup() {
           clearTimeout(t);
           try { delete window[cb]; } catch (e) {}
@@ -1590,9 +1590,7 @@
       apply();
       ehitaGalerii(pildid);
       const url = seaded.soov_url || "";
-      return laeTabeliNimekiri(url).catch(function () {
-        return fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []);
-      });
+      return laeTabeliNimekiri(url).catch(function () { return []; });
     }).then((rows) => {
       rowsCache = Array.isArray(rows) ? rows : [];
       apply();
