@@ -683,10 +683,10 @@
       <button type="button" class="menu-nupp" id="menuNupp" aria-label="Menüü">☰</button>
       <nav class="toc" id="peamenüü">
         <a href="#tulekul" data-i="nav_tulekul">Tulekul</a>
-        <a href="#mis" data-i="nav_mis">Mis see on</a>
-        <a href="#kuidas" data-i="nav_kuidas">Kuidas tulla</a>
-        <a href="#muud" data-i="nav_muud">Teised võimalused</a>
-        <a href="#pildid" data-i="nav_pildid">Pildid</a>
+        <a href="#mis" data-i="nav_mis">Helirännak</a>
+        <a href="#kuidas" data-i="nav_kuidas">Huvitav teada</a>
+        <a href="#muud" data-i="nav_muud">Privaatrännak</a>
+        <a href="#pildid" data-i="nav_pildid">Galerii</a>
         <a href="#kontakt" data-i="nav_kontakt">Kontakt</a>
       </nav>
       <div class="hero-right">
@@ -722,7 +722,7 @@
       <summary>
         <div class="sum-peamine">
           <span class="sum-silt" data-i="jargmine">Järgmine rännak</span>
-          <span id="jargmine">Laen listi…</span>
+          <span id="jargmine"></span>
         </div>
         <button type="button" class="osalen-nupp" id="osalenNupp" data-i="soov_silt">Osalen</button>
       </summary>
@@ -771,7 +771,7 @@
     </details>
 
     <details class="acc" id="mis">
-      <summary data-i="mis">Mis see on</summary>
+      <summary data-i="mis">Madalsageduslik somaatilis-vibroakustiline helirännak</summary>
       <div class="acc-clip">
       <div class="body">
         <p data-i="mis_lyhi">Helirännak parmupilli, didgeridoo ja madalate kristallkausidega. Enne heli on lühike kehaäratus ja paar suunavat lauset. Rääkida ei ole vaja.</p>
@@ -800,7 +800,7 @@
     </details>
 
     <details class="acc" id="muud">
-      <summary data-i="muud">Teised võimalused</summary>
+      <summary data-i="muud">Privaatrännak</summary>
       <div class="acc-clip">
       <div class="body">
         <p data-i="muud_tekst" style="white-space:pre-line"></p>
@@ -808,7 +808,7 @@
       </div>
     </details>
 
-    <h2 id="pildid" data-i="pildid">Pildid</h2>
+    <h2 id="pildid" data-i="pildid">Galerii</h2>
     <div class="gallery" id="galerii"></div>
     <p class="empty" data-i="pildid_mark" style="margin-top:.7rem"></p>
 
@@ -1587,6 +1587,7 @@
       T = tekstid;
       seaded = Object.assign(seaded, s);
       sisu = sisuFail;
+      apply();
       ehitaGalerii(pildid);
       const url = seaded.soov_url || "";
       return laeTabeliNimekiri(url).catch(function () {
