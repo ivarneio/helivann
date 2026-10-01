@@ -277,6 +277,11 @@
       font-variant-numeric: lining-nums tabular-nums;
       font-weight: 600;
     }
+    a.kaart {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: .16em;
+    }
     #jargmine .where { display: block; }
     details.acc summary::-webkit-details-marker { display: none; }
     details.acc summary::after {
@@ -869,6 +874,13 @@
       renderList();
       taidaSoovValik();
     }
+    function kohtHtml(e) {
+      const nimi = e.koht || "";
+      const url = e.kaart || "";
+      if (!nimi) return "";
+      if (!url) return nimi;
+      return "<a class='kaart' href='" + url.replace(/'/g, "%27") + "' target='_blank' rel='noopener'>" + nimi + "</a>";
+    }
     function renderList() {
       const pack = (T[lang] || T.et);
       const nextBox = document.getElementById("jargmine");
@@ -884,10 +896,10 @@
       const n = soon[0];
       nextBox.innerHTML =
         "<div class='when'>" + formaat(n.kuupaev) + " · " + n.kellaaeg + "</div>" +
-        "<div class='where'>" + n.koht + (n.tais ? " · " + pack.tais : "") + "</div>";
+        "<div class='where'>" + kohtHtml(n) + (n.tais ? " · " + pack.tais : "") + "</div>";
       list.innerHTML = soon.slice(1, 4).map(e =>
         "<li><strong>" + formaat(e.kuupaev) + " · " + e.kellaaeg + "</strong><br>" +
-        e.koht +
+        kohtHtml(e) +
         (e.markus ? "<br><span>" + e.markus + "</span>" : "") +
         (e.tais ? " <span class='tais'>" + pack.tais + "</span>" : "") +
         "</li>"
