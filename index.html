@@ -1591,4 +1591,15 @@
       ehitaGalerii(pildid);
       const url = seaded.soov_url || "";
       return laeTabeliNimekiri(url).catch(function () {
-        return fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() 
+        return fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []);
+      });
+    }).then((rows) => {
+      rowsCache = Array.isArray(rows) ? rows : [];
+      apply();
+    }).catch(() => {
+      document.getElementById("jargmine").textContent = "Listi ei saanud laadida.";
+    });
+
+  </script>
+</body>
+</html>
