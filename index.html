@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --cream: #f7efe3;
@@ -488,12 +488,19 @@
       border-radius:50%; animation: soovTiir 0.7s linear infinite;
     }
     @keyframes soovTiir { to { transform: rotate(360deg); } }
-        .soel-kysi { margin: .15rem 0 .45rem; font-size: 1.05rem; color: var(--ink); white-space: pre-line; }
-    .soel-valikud { display:flex; gap:.4rem; margin:.2rem 0 .45rem; }
+        .soel-kysi { margin: .15rem 0 .45rem; font-size: 1.05rem; color: var(--ink); }
+    .soel-tehe {
+      font-family: "Caveat", cursive;
+      font-size: 1.85rem;
+      line-height: 1;
+      color: #4a2c1a;
+      margin-left: .3rem;
+    }
+    .soel-valikud { display:flex; gap:.55rem; margin:.2rem 0 .45rem; }
     .soel-valikud label {
-      flex:1; min-width:0; height:2.15rem; display:flex; align-items:center; justify-content:center;
-      border:1px solid var(--line); border-radius:8px; background:#fff;
-      color:var(--ink); font-size:1.15rem; font-weight:700; cursor:pointer;
+      width: 1.7rem; height: 1.7rem; display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--line); border-radius:50%; background:#fff;
+      color:var(--ink); font-size:.95rem; font-weight:500; cursor:pointer;
     }
     .soel-valikud input { display:none; }
     .soel-valikud label:has(input:checked) {
@@ -724,13 +731,12 @@
           <ul class="list" id="list"></ul>
           <div class="inner peidus" id="soov">
             <div id="soel">
-              <p class="soel-kysi" data-i="soov_soel">Et soov tuleks inimeselt.<br>2 + 1 = ?</p>
+              <p class="soel-kysi"><span data-i="soov_soel">Et soov tuleks inimeselt.</span> <span class="soel-tehe" id="soelTehe"></span></p>
               <div class="soel-valikud" id="soelValikud">
+                <label><input type="radio" name="soelValik" value="1"> 1</label>
                 <label><input type="radio" name="soelValik" value="2"> 2</label>
                 <label><input type="radio" name="soelValik" value="3"> 3</label>
                 <label><input type="radio" name="soelValik" value="4"> 4</label>
-                <label><input type="radio" name="soelValik" value="5"> 5</label>
-                <label><input type="radio" name="soelValik" value="6"> 6</label>
               </div>
               <button type="button" class="saada" id="soelEdasi" data-i="soel_edasi">Edasi</button>
             </div>
@@ -1339,6 +1345,20 @@
 
 
     let soelOk = false;
+    let soelVastus = 3;
+    function uusTehe() {
+      const vastus = 1 + Math.floor(Math.random() * 4);
+      const tehe = document.getElementById("soelTehe");
+      document.querySelectorAll("input[name=soelValik]").forEach(x => { x.checked = false; });
+      if (Math.random() < 0.5) {
+        const vasak = Math.floor(Math.random() * (vastus + 1));
+        if (tehe) tehe.textContent = vasak + " + " + (vastus - vasak) + " = ?";
+      } else {
+        const parem = Math.floor(Math.random() * 4);
+        if (tehe) tehe.textContent = (vastus + parem) + " − " + parem + " = ?";
+      }
+      soelVastus = vastus;
+    }
     let soovSaadetud = false;
     function peidaSoovSisu() {
       const soel = document.getElementById("soel");
@@ -1428,6 +1448,7 @@
       else {
         peidaSoovSisu();
         document.getElementById("soel").classList.remove("peidus");
+        uusTehe();
       }
     }
     function avaSoov() {
@@ -1474,7 +1495,7 @@
     document.getElementById("soelEdasi").addEventListener("click", () => {
       const pack = T[lang] || T.et || {};
       const val = document.querySelector("input[name=soelValik]:checked");
-      if (!val || val.value !== "3") {
+      if (!val || Number(val.value) !== soelVastus) {
         alert(pack.soel_vale || "Proovi veel.");
         return;
       }
@@ -1569,15 +1590,4 @@
       ehitaGalerii(pildid);
       const url = seaded.soov_url || "";
       return laeTabeliNimekiri(url).catch(function () {
-        return fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() => []);
-      });
-    }).then((rows) => {
-      rowsCache = Array.isArray(rows) ? rows : [];
-      apply();
-    }).catch(() => {
-      document.getElementById("jargmine").textContent = "Listi ei saanud laadida.";
-    });
-
-  </script>
-</body>
-</html>
+        return fetch("sundmused.json", { cache: "no-store" }).then(r => r.json()).catch(() 
